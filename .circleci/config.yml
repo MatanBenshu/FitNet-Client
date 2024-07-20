@@ -23,7 +23,7 @@ jobs:
       - checkout
       - run:
           name: deploy to render
-          command: curl "https://api.render.com/deploy/srv-cqc37tjv2p9s73fg1hl0?key=JiC9HIVqvwM"
+          command: curl "https://api.render.com/deploy/srv-cqe30dggph6c73ah4bt0?key=Bqq911G-jcA"
 
 workflows:
   client_CICD:
