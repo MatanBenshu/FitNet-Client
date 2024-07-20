@@ -1,0 +1,37 @@
+# This config was automatically generated from your source code
+# Stacks detected: deps:node:.
+version: 2.1
+orbs:
+  node: circleci/node@5
+jobs:
+  deps-test-lint:
+    executor: node/default
+    steps:
+      - checkout
+      - run:
+          name: install app dependencies
+          command: npm install
+      - run:
+          name: run tests
+          command: npm test
+      - run:
+          name: run linter
+          command: npm run lint
+  deploy:
+    executor: node/default
+    steps:
+      - checkout
+      - run:
+          name: deploy to render
+          command: curl "https://api.render.com/deploy/srv-cqe30dggph6c73ah4bt0?key=Bqq911G-jcA"
+
+workflows:
+  client_CICD:
+    jobs:
+      - deps-test-lint
+      - deploy:
+          requires:
+            - deps-test-lint
+          filters:
+            branches:
+              only: Production
