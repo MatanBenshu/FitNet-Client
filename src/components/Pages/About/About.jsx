@@ -7,7 +7,7 @@ const About = () => {
 
     const fetchContent = async () => {
         try {
-            const response = await fetch('http://localhost:5000/contents/about');
+            const response = await fetch('https://fitnet-server-1.onrender.com/contents/about');
             const data = await response.json();
             if (data.success) {
                 setContent(data.user.content);
