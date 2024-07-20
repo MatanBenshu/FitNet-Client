@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Register from './components/Pages/Register/Register.jsx';
 import Home from './components/Pages/Home/Home.jsx';
-import Login from './components/Pages/Login/Login.jsx';
+import Login from './components/Pages/Login/login.jsx';
 import About from './components/Pages/About/About.jsx';
 import Navbar from './components/Pages/navBar/navBar.jsx';
 import './App.css';
