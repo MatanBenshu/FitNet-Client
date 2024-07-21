@@ -29,7 +29,7 @@ function Login() {
         if (data.success) {
             console.log('Login successful, user data:', data.user);
 
-            login(data.user);
+            login(data.user, data.token);
             navigate('/');
         } else {
             setMessage('Login failed: ' + data.message);
