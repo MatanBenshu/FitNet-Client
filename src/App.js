@@ -9,14 +9,8 @@ import { AuthContext } from './components/context/AuthContext.js';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 
-function  App() {
-    const { authState, loading } = useContext(AuthContext);
-    console.log(authState.isAuthenticated);
-    if(loading)
-    {
-        return <div>loading...</div>;
-    }
-        
+function App() {
+    const { authState } = useContext(AuthContext);
     return (
         <div className="App">
             <Navbar />
