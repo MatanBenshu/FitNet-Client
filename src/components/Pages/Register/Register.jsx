@@ -63,7 +63,7 @@ function Register() {
         const data = await response.json();
         console.log(data);
         if (data.success) {
-            login(data.user);
+            login(data.user,data.token);
             navigate('/');
         } else {
             setMessage('Registration failed: ' + data.message);
