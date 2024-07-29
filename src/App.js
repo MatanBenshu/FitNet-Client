@@ -46,7 +46,7 @@ function  App() {
                         }
                     />
                     <Route
-                        path="profile"
+                        path="profile/:username"
                         element={
                             authState.isAuthenticated ? <Profile /> : <Navigate to="login" />
                         }
