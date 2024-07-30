@@ -1,30 +1,22 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext.js';
+import axios from 'axios';
 import './Login.css';
-//import { FaUser,FaLock } from "react-icons/fa";
-import { Link } from 'react-router-dom';
 
-/*need to add born date
 
-*/
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
+
     const handleLogin = async (e) => {
         e.preventDefault();
-        const response = await fetch('https://fitnet-server-1.onrender.com/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-        });
+        const response = await axios.post('/auth/login',{ email,password});
 
-        const data = await response.json();
+        const data = response.data;
 
         if (data.success) {
             console.log('Login successful, user data:', data.user);

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext.js';
+import axios from 'axios';
 import './Register.css';
-import { Link } from 'react-router-dom';
 
 function Register() {
     const [username, setUsername] = useState('');
@@ -43,24 +43,18 @@ function Register() {
             return;
         }
 
-        const response = await fetch('https://fitnet-server-1.onrender.com/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username,
-                email,
-                password,
-                firstName,
-                lastName,
-                birthDate,
-                gender,
-                address,
-            }),
+        const response = await axios.post('/auth/register', {
+            username,
+            email,
+            password,
+            firstName,
+            lastName,
+            birthDate,
+            gender,
+            address,    
         });
 
-        const data = await response.json();
+        const data = response.data;
         console.log(data);
         if (data.success) {
             login(data.user,data.token);

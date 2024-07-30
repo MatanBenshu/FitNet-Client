@@ -1,35 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './About.css';
+import axios from 'axios';
 
 const About = () => {
     const [message, setMessage] = useState('');
     const [content, setContent] = useState('');
+    const [creators, setCreators] = useState([]);
 
-    const fetchContent = async () => {
-        try {
-            const response = await fetch('https://fitnet-server-1.onrender.com/contents/about');
-            const data = await response.json();
-            if (data.success) {
-                setContent(data.user.content);
-            } else {
-                setMessage('Error fetching user data: ' + data.message);
+    useEffect(() => {
+        const fetchContent = async () => {
+            try {
+                const response = await axios.get('contents/about');
+                console.log(response);
+                const data = response.data;
+                if (data.success) {
+                    setContent(data.user.content);
+                    setCreators(data.user.creators); 
+                    
+    
+                } else {
+                    setMessage('Error fetching user data: ' + data.message);
+                }
+            } catch (error) {
+                setMessage('Error fetching user data: ' + error.message);
             }
-        } catch (error) {
-            setMessage('Error fetching user data: ' + error.message);
-        }
-    };
-    fetchContent();
+        };
+        fetchContent();
+    }, []); 
+
+
+
     return (
         <div className="about">
+            {message !== '' && <h2> {message} </h2>}
             <h2>About FitNet</h2>
             <p>{message === '' ? content : message}</p>
             <h3>Creators</h3>
             <ul>
-                <li>Matan Ben Shushan</li>
-                <li>Reem Levi</li>
-                <li>Yarden Shaked</li>
-                <li>Shiraz Nagaoker</li>
-                <li>Moran Avraham</li>
+                {creators.map((creator) => <li key={creators.indexOf(creator)}>{creator}</li> )}
             </ul>
         </div>
     );
