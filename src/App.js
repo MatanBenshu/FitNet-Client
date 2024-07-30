@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { AuthContext } from './components/context/AuthContext.js';
-import Register from './components/Pages/Register/Register.jsx';
-import Home from './components/Pages/Home/Home.jsx';
-import Login from './components/Pages/Login/login.jsx';
-import About from './components/Pages/About/About.jsx';
-import Navbar from './components/Pages/navBar/navBar.jsx';
-import Profile from './components/Pages/Profile/Profile.jsx';
-import Search from './components/Pages/Search/Search.jsx';
+import { AuthContext } from './context/AuthContext.js';
+import Register from './Pages/Register/Register.jsx';
+import Home from './Pages/Home/Home.jsx';
+import Login from './Pages/Login/login.jsx';
+import About from './Pages/About/About.jsx';
+import Navbar from './components/navBar/navBar.jsx';
+import Profile from './Pages/Profile/Profile.jsx';
+import Search from './Pages/Search/Search.jsx';
 import './App.css';
 
 
