@@ -14,18 +14,22 @@ function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const response = await axios.post('/auth/login',{ email,password});
-
-        const data = response.data;
-
-        if (data.success) {
-            console.log('Login successful, user data:', data.user);
-
-            login(data.user, data.token);
-            navigate('/');
-        } else {
-            setMessage('Login failed: ' + data.message);
+        try {
+            const response = await axios.post('/auth/login',{ email,password});
+            const data = response.data;
+            if (data.success) {
+                console.log('Login successful, user data:', data.user);
+    
+                login(data.user, data.token);
+                navigate('/');
+            } else {
+                setMessage('Login failed: ' + data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            setMessage('Error logging in. Please try again.');
         }
+
     };
 
     return (
