@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import Home from './components/Pages/Home/Home.jsx';
+import Login from './Pages/Login/login.jsx';
 
 test('renders learn react link', () => {
-    render(<Home />);
-    const linkElement = screen.getByText(/Welcome to FitNet/);
+    render(<Login />);
+    const linkElement = screen.getByText(/Login/);
     expect(linkElement).toBeInTheDocument();
 });
