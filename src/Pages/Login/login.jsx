@@ -30,10 +30,11 @@ function Login() {
 
     return (
         <div className="login">
-            <h2>Login</h2>
+            <h2>Welcome to FitNet</h2>
             <form onSubmit={handleLogin}>
                 <label>Email:</label>
                 <input
+                    placeholder='Enter your email'
                     type="email"
                     required
                     value={email}
@@ -41,6 +42,7 @@ function Login() {
                 />
                 <label>Password:</label>
                 <input
+                    placeholder='Enter your password'
                     type="password"
                     required
                     value={password}
