@@ -5,62 +5,59 @@ import Register from './Pages/Register/Register.jsx';
 import Home from './Pages/Home/Home.jsx';
 import Login from './Pages/Login/login.jsx';
 import About from './Pages/About/About.jsx';
-import Navbar from './components/navBar/navBar.jsx';
+import Page404 from './Pages/Page404/Page404.jsx';
 import Profile from './Pages/Profile/Profile.jsx';
 import Search from './Pages/Search/Search.jsx';
-import './App.css';
-
 
 function  App() {
-    const { authState, loading } = useContext(AuthContext);
-    console.log(authState.isAuthenticated);
-    if(loading)
-    {
-        return <div>loading...</div>;
-    }
+    const { user } = useContext(AuthContext);
         
     return (
         <div className="App">
             <Routes>
-                <Route path="/" element={<Navbar />} >
+                <Route path="/" >
                     <Route
                         index
                         element={
-                            authState.isAuthenticated ? <Home /> : <Navigate to="login" />
+                            user ? <Home /> : <Navigate to="login" />
                         }
                     />                
                     <Route path="login" 
                         element={
-                            authState.isAuthenticated ? <Navigate to="/" /> : <Login />
+                            user ? <Navigate to="/" /> : <Login />
                         } 
                     />
                     <Route path="register"
                         element={
-                            authState.isAuthenticated ? <Navigate to="/" /> : <Register />
+                            user ? <Navigate to="/" /> : <Register />
                         } 
                     />
                     <Route
                         path="about"
                         element={
-                            authState.isAuthenticated ? <About /> : <Navigate to="login" />
+                            user ? <About /> : <Navigate to="login" />
                         }
                     />
                     <Route
                         path="profile/:username"
                         element={
-                            authState.isAuthenticated ? <Profile /> : <Navigate to="login" />
+                            user ? <Profile /> : <Navigate to="login" />
                         }
                     />                                        
                     <Route
                         path="search"
                         element={
-                            authState.isAuthenticated ? <Search /> : <Navigate to="login" />
+                            user ? <Search /> : <Navigate to="login" />
                         }
+                    />
+                    <Route
+                        path="page404"
+                        element={<Page404 /> }
                     />
                     <Route
                         path="*"
                         element={
-                            authState.isAuthenticated ? <Navigate to="/" /> : <Navigate to="login" />
+                            user ? <Navigate to="/" /> : <Navigate to="login" />
                         }
                     />                                    
                 </Route>

@@ -1,60 +1,61 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate,Link } from 'react-router-dom';
+import React, { useState, useContext, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext.js';
+import NavBar from '../../components/navBar/navBar';
 import axios from 'axios';
 import './Login.css';
 
 
 function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const email = useRef();
+    const password = useRef();
     const [message, setMessage] = useState('');
-    const { login } = useContext(AuthContext);
-    const navigate = useNavigate();
+    const { isFetching,dispatch} = useContext(AuthContext);
+
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const response = await axios.post('/auth/login',{ email,password});
-
-        const data = response.data;
-
-        if (data.success) {
-            console.log('Login successful, user data:', data.user);
-
-            login(data.user, data.token);
-            navigate('/');
-        } else {
-            setMessage('Login failed: ' + data.message);
+        try {
+            dispatch({ type: 'LOGIN_START' });
+            const response = await axios.post('/auth/login',{ email: email.current.value, password: password.current.value });
+            dispatch({ type: 'LOGIN_SUCCESS', payload:response.data });
+        } catch (error) {
+            dispatch({ type: 'LOGIN_FAILURE' ,payload:error });
+            setMessage('Login failed:' + error.response.data);
         }
     };
 
     return (
-        <div className="login">
-            <h2>Welcome to FitNet</h2>
-            <form onSubmit={handleLogin}>
-                <label>Email:</label>
-                <input
-                    placeholder='Enter your email'
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <label>Password:</label>
-                <input
-                    placeholder='Enter your password'
-                    type="password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit">Login</button>
-            </form>
-            {message && <p>{message}</p>}
-            <p>
+        <>
+            <NavBar />
+            <div className="login">
+                <h2>Welcome to FitNet</h2>
+                <form onSubmit={handleLogin}>
+                    <label>Email:</label>
+                    <input
+                        placeholder='Enter your email'
+                        type="email"
+                        required
+                        ref={email}
+                    />
+                    <label>Password:</label>
+                    <input
+                        placeholder='Enter your password'
+                        type="password"
+                        required
+                        minLength="8"
+                        ref={password}  
+                    />
+                    <button type="submit">
+                        {isFetching ? 'Loading...'  : 'Login'}
+                    </button>
+                </form>
+                {message && <p>{message}</p>}
+                <p>
         Don't have an account? <Link to="/register">Register here</Link>
-            </p>
-        </div>
+                </p>
+            </div>
+        </>
     );
 }
 

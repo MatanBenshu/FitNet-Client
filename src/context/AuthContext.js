@@ -1,71 +1,32 @@
-import React, { createContext, useState,useEffect } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
+import AuthReducer from './AuthReducer';
 
-export const AuthContext = createContext();
+const INITIAL_STATE = {
+    user:JSON.parse(localStorage.getItem('user')) || null,
+    isFetching: false,
+    error: false,
+};
 
-const AuthProvider =  ({ children }) => {
-   
-    const [authState, setAuthState] = useState(
-        JSON.parse(localStorage.getItem('user')) && localStorage.getItem('token') ?
-            {
-                isAuthenticated: true,
-                user: JSON.parse(localStorage.getItem('user')),
-                token: localStorage.getItem('token')
-            } :
-            {
-                isAuthenticated: false,
-                user:null,
-                token:null
-            });
+export const AuthContext = createContext(INITIAL_STATE);
 
-    const [loading, setLoading] = useState(true);
-
-    const login = (user,token) => {
-        setAuthState({
-            isAuthenticated: true,
-            user,
-            token
-        
-        });
-        localStorage.setItem('user',JSON.stringify(user));
-        localStorage.setItem('token',token);
-   
-       
-    };
-
-    const logout = () => {
-        setAuthState({
-            isAuthenticated: false,
-            user: null,
-            following:null,
-        });
-        localStorage.removeItem('user');
-        localStorage.removeItem('token');
-      
-    };
-
-    useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem('user'));
-        const storedToken = localStorage.getItem('token');
-      
-        if (storedUser && storedToken) {
-            setAuthState({
-                isAuthenticated: true,
-                user: storedUser,
-                token: storedToken
-            });
-            
-        }
-        setLoading(false);
-    }, []);
-
+export  const AuthContextProvider = ({ children }) => {
+    const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
+  
+    useEffect(()=>{
+        localStorage.setItem('user', JSON.stringify(state.user));
+    },[state.user]);
+  
     return (
-        <AuthContext.Provider value={{ authState, login, logout,loading }}>
+        <AuthContext.Provider
+            value={{
+                user: state.user,
+                isFetching: state.isFetching,
+                error: state.error,
+                dispatch,
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );
-
-
 };
 
-
-export default AuthProvider;

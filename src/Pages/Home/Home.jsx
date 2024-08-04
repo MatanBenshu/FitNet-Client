@@ -1,10 +1,21 @@
 import React from 'react';
+import Sidebar from '../../components/sidebar/Sidebar';
+import Feed from '../../components/feed/Feed';
+import Rightbar from '../../components/rightbar/Rightbar';
+import NavBar from '../../components/navBar/navBar';
+
+import './Home.css'; 
+
+
+
 function Home() {
     return (
         <>
-            <div className="home">
-                <h2>Welcome to FitNet</h2>
-                <p>Your fitness journey starts here!</p>
+            <NavBar />
+            <div className="homeContainer">
+                <Sidebar/>
+                <Feed/>
+                <Rightbar/>
             </div>
         </>
     );
