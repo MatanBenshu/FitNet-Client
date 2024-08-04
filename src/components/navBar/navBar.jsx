@@ -4,7 +4,11 @@ import { AuthContext } from '../../context/AuthContext.js';
 import './navBar.css';
 
 function NavBar() {
-    const { authState, logout } = useContext(AuthContext);
+    const { user,dispatch } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        dispatch({ type: 'LOGOUT' });
+    };
 
     return (
         <>
@@ -16,15 +20,10 @@ function NavBar() {
                         </span>
                     </Link>
                 </h1>
-                {authState.isAuthenticated && (
+                {user && (
                     <ul>
-                        {/*
                         <li className='centerLink'>
-                            <Link to="/">Home</Link>
-                        </li>
-                        */}
-                        <li className='centerLink'>
-                            <Link to={`/profile/${authState.user.username}`}>Profile</Link>
+                            <Link to={`/profile/${user.username}`}>Profile</Link>
                         </li>
                         <li className='centerLink'>
                             <Link to="/search">Search</Link>
@@ -32,9 +31,9 @@ function NavBar() {
                         <li className='centerLink'>
                             <Link to="/about">About</Link>
                         </li>
-                        <li className='leftLink'>{authState.user.username}</li>
+                        <li className='leftLink'>Log as {user.username}</li>
                         <li className='leftLink'>
-                            <button onClick={logout}>Logout</button>
+                            <button onClick = {handleLogOut}>Logout</button>
                         </li>
                     </ul>
                 )}
