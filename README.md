@@ -1,70 +1,101 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## FitNet-Project Overview
 
-## Available Scripts
+This project aims to develop a comprehensive social network for fitness and training enthusiasts. It includes functionalities for user registration, membership management, home page interactions, personal profile management, and various social networking features such as liking, sharing, and following content.
 
-In the project directory, you can run:
+### Links:
+1. FrontEnd: https://fitnet-client.onrender.com
+2. BackEnd: https://fitnet-server-1.onrender.com
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### User Registration and Membership
+- **Registration**: Sign up with username(mandatory), email(mandatory), password(mandatory), and additional personal information(optional).
+- **Membership**: Sign in with registered email address and password.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Home Page Functionalities
+- **Content Interaction**: Post, like, share and save content.
+- **Social Networking**: Follow other users and view their activities.
 
-### `npm test`
+### Personal Area
+- Edit personal details.
+- Delete accounts.
+- Change passwords.
+- View and manage followed users.
+- View and manage uploaded content.
+- View and manage liked and saved content.
+- Access statistical information.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Additional Features
+- **Sports Activity Events**: Upload and join sports activities.
+- **Weather Conditions**: Check relevant weather conditions.
+- **Training Groups**: Create and join training groups.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Management
+- The project is organized into sprints, with tasks assigned to specific sprints for completion.
+- Tasks are tracked through their lifecycle, from creation to completion.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Summary
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The fitness and training social network project is designed to provide a robust platform where fitness enthusiasts can connect, share content, and engage in various activities. The detailed tasks and user stories ensure meticulous planning and tracking, facilitating successful implementation of each feature.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Technologies Used
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Frontend: React, React Router, Context API
+- Backend: Node.js, Express.js, MongoDB, Mongoose
+- Styling: CSS
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## System Requirements
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To run this project, you will need to have the following software and hardware:
 
-## Learn More
+### Software Requirements
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Node.js**: Version 14.x or higher
+- **NPM (Node Package Manager)**: Version 6.x or higher
+- **MongoDB**: Version 4.x or higher (MongoDB Atlas recommended for cloud-based MongoDB)
+- **Operating System**: Compatible with Windows, macOS, and Linux
+- **Git**: Version control system to clone the repository
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Getting Started
 
-### Code Splitting
+### Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Ensure Node.js and npm are installed. You can download and install them from [Node.js official website](https://nodejs.org/).
+- Ensure MongoDB is installed. You can download and install it from [MongoDB official website](https://www.mongodb.com/try/download/community). Alternatively, you can use MongoDB Atlas for a cloud-hosted MongoDB solution.
+- Ensure Git is installed. You can download and install it from [Git official website](https://git-scm.com/).
 
-### Analyzing the Bundle Size
+### Installation
+1. Clone the repository
+2. Navigate to the project directory and open cmd
+3. Install dependencies , run the command 'npm install'
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+## Running the Application
+- Start the server with the command 'npm run start'
+- change the address of the server in .env file to your localhost + '/images/'
+- change the address of the server in the package.json "proxy" to your localhost
+- start the client side with the command 'npm run start' 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Contact
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Email: Matanbe7@ac.sce.ac.il
+- GitHub: MatanBenshu
 
-### Deployment
+- Email: moranav1@ac.sce.ac.il
+- GitHub: moranavraham1
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Email: shirana2@ac.sce.ac.il
+- GitHub: shirazNagaoker
 
-### `npm run build` fails to minify
+- Email: yardesh5@ac.sce.ac.il
+- GitHub: yardensk1
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Email: reemle@ac.sce.ac.il
+- GitHub: reamlevi
+
+
+
