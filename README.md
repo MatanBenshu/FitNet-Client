@@ -75,6 +75,9 @@ To run this project, you will need to have the following software and hardware:
 
 ## Running the Application
 - Start the server with the command 'npm run start'
+- change the address of the server in .env file to your localhost + '/images/'
+- change the address of the server in the package.json "proxy" to your localhost
+- start the client side with the command 'npm run start' 
 
 ## Contact
 
