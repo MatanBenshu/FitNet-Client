@@ -3,6 +3,32 @@
 
 This project aims to develop a comprehensive social network for fitness and training enthusiasts. It includes functionalities for user registration, membership management, home page interactions, personal profile management, and various social networking features such as liking, sharing, and following content.
 
+## FitNet-Project Overview
+
+This project aims to develop a comprehensive social network for fitness and training enthusiasts. It includes functionalities for user registration, membership management, home page interactions, personal profile management, and various social networking features such as liking, sharing, and following content.
+
+### Links:
+1. FrontEnd: https://fitnet-client.onrender.com
+2. BackEnd: https://fitnet-server-1.onrender.com
+
+## Features
+
+### User Registration and Membership
+- **Registration**: Sign up with username(mandatory), email(mandatory), password(mandatory), and additional personal information(optional).
+- **Membership**: Sign in with registered email address and password.
+
+### Home Page Functionalities
+- **Content Interaction**: Post, like, share and save content.
+- **Social Networking**: Follow other users and view their activities.
+
+### Personal Area
+- Edit personal details.
+- Delete accounts.
+- Change passwords.
+- View and manage followed users.
+- View and manage uploaded content.
+- View and manage liked and saved content.
+- Access statistical information.
 ### Links:
 1. FrontEnd: https://fitnet-client.onrender.com
 2. BackEnd: https://fitnet-server-1.onrender.com
@@ -75,6 +101,9 @@ To run this project, you will need to have the following software and hardware:
 
 ## Running the Application
 - Start the server with the command 'npm run start'
+- change the address of the server in .env file to your localhost + '/images/'
+- change the address of the server in the package.json "proxy" to your localhost
+- start the client side with the command 'npm run start' 
 
 ## Contact
 
@@ -96,9 +125,3 @@ To run this project, you will need to have the following software and hardware:
 
 
 
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
