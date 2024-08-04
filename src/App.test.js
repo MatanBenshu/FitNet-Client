@@ -1,16 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import AuthProvider from './context/AuthContext.js';
-import Login from './Pages/Login/login.jsx';
-import { BrowserRouter } from 'react-router-dom';
+
+import Page404 from './Pages/Page404/Page404.jsx';
+
 
 test('renders learn react link', () => {
-    render(
-        <BrowserRouter>
-            <AuthProvider>
-                <Login />
-            </AuthProvider>
-        </BrowserRouter>
-    );
-    const linkElement = screen.getByText(/FitNet/);
+    render(<Page404/>);
+    const linkElement = screen.getByText(/404/);
     expect(linkElement).toBeInTheDocument();
 });
