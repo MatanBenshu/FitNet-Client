@@ -33,6 +33,7 @@ function Search() {
                     <input
                         type="text"
                         placeholder="Enter username"
+                        required
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                     />
