@@ -5,13 +5,15 @@ import './feed.css';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 
-export default function Feed({ username,updateCurrentUser }) {
+export default function Feed({ username,updateCurrentUser,updateRightBar }) {
     const [render,reRender] = useState(0);
     const [posts, setPosts] = useState([]);
     const { user } = useContext(AuthContext);
 
     function handleReRenderFeed ()  {
         reRender(perv =>perv +1);
+        if (updateRightBar){ updateRightBar();}
+       
     };
 
 
