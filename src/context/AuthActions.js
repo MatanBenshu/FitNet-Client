@@ -25,10 +25,8 @@ export const Unfollow = (userId) => ({
     payload: userId,
 });
 
-export const updateUser = (UpdateFieldsObject) => ({
-    
+export const updateUser = (user) => ({ 
     type: 'UPDATE_USER',
-    payload: UpdateFieldsObject,
-    
+    payload: user,  
 });
   
