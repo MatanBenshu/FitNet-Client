@@ -114,3 +114,11 @@
 .rightbarFollowButton:focus{
   outline: none;
 }
+
+.rightbarStaticWrapper{
+  margin-bottom: 30px;
+  display:flex;
+}
+.staticContainer{
+  flex: 1;
+}

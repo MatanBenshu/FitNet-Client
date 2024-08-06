@@ -12,14 +12,13 @@ import EventList from '../eventList/EventList';
 
 
 
-export default function Sidebar() {
+export default function Sidebar({updateRightBar}) {
 
     const [showFormGroup, setShowFormGroup] = useState(false);
     const [showFormEvent, setShowFormEvent] = useState(false);
     const { user } = useContext(AuthContext);
     const [groups, setGroups] = useState([]);
     const [events, setEvents] = useState([]); 
-    console.log( events);
 
 
     function togglePopGroup () {
@@ -58,8 +57,8 @@ export default function Sidebar() {
 
     return (
         <>
-            {showFormGroup ? <GroupForm toggle={togglePopGroup} /> : null}
-            {showFormEvent ? <EventForm toggle={togglePopEvent} /> : null}
+            {showFormGroup ? <GroupForm toggle={togglePopGroup} rightBar={updateRightBar} /> : null}
+            {showFormEvent ? <EventForm toggle={togglePopEvent} rightBar={updateRightBar}/> : null}
             <div className="sidebar">
                 <div className="sidebarWrapper">
                     <button className="sidebarButtonGroup" onClick={togglePopGroup}>

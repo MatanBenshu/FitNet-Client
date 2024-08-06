@@ -7,19 +7,18 @@ import { Add, Remove,Edit } from '@mui/icons-material';
 import Moment from 'react-moment';
 import EditUserInfoForm from '../editUserInfoForm/EditUserInfoForm';
 
-export default function Rightbar({ user ,infoUpdated}) {
+export default function Rightbar({ user ,infoUpdated,someUpdate}) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const [friends, setFriends] = useState([]);
+    const [statistic, setStatistic] = useState({});
     const { user: currentUser, dispatch } = useContext(AuthContext);
     const [followed, setFollowed] = useState(currentUser.followings.includes(user?._id));
     const [showEditForm, setShowEditForm] = useState(false);
-
     
 
     function togglePopEdit () {
         infoUpdated();
         setShowEditForm(!showEditForm);
-        console.log(currentUser);
     };
 
     useEffect(() => {
@@ -36,8 +35,20 @@ export default function Rightbar({ user ,infoUpdated}) {
                 }
             }
         };
+        const getStatistic = async () => {
+            if (user) {
+                try {
+                    const statistic = await axios.get(`/users/statistic/${user._id}`);
+                    setStatistic(statistic.data);
+                    console.log(statistic.data);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+        };
         getFriends();
-    }, [user,currentUser]);
+        getStatistic();
+    }, [user,currentUser,someUpdate]);
 
     const handleClick = async () => {
         try {
@@ -113,10 +124,49 @@ export default function Rightbar({ user ,infoUpdated}) {
                     </div>
                 </div>
                 <h4 className="rightbarTitle">User statistic</h4>
+                <div className="rightbarStaticWrapper">
+                    <div className='staticContainer'>
+                        <div className="rightbarInfoItem">
+                            <span className="rightbarInfoKey">Friends: </span>
+                            <span className="rightbarInfoValue">{statistic.followersCount} .</span>
+                        </div>
+                        <div className="rightbarInfoItem">
+                            <span className="rightbarInfoKey">Posts Created:</span>
+                            <span className="rightbarInfoValue">{statistic.postsCount} .</span>
+                        </div>
+                        <div className="rightbarInfoItem">
+                            <span className="rightbarInfoKey">Posts Liked:</span>
+                            <span className="rightbarInfoValue">{statistic.postsLiked} .</span>
+                        </div>
+                        <div className="rightbarInfoItem">
+                            <span className="rightbarInfoKey">Posts Saved:</span>
+                            <span className="rightbarInfoValue">{statistic.postsSaved} .</span>
+                        </div>
+                    </div>
+                    <div className='staticContainer'>
+                        <div className="rightbarInfoItem">
+                            <span className="rightbarInfoKey">Events Created:</span>
+                            <span className="rightbarInfoValue">{statistic.eventsCount} .</span>
+                        </div>
+                        <div className="rightbarInfoItem">
+                            <span className="rightbarInfoKey">Events Joined:</span>
+                            <span className="rightbarInfoValue">{statistic.eventsJoined} .</span>
+                        </div>
+                        <div className="rightbarInfoItem">
+                            <span className="rightbarInfoKey">Groups Created:</span>
+                            <span className="rightbarInfoValue">{statistic.groupsCount} .</span>
+                        </div>
+                        <div className="rightbarInfoItem">
+                            <span className="rightbarInfoKey">Groups Joined</span>
+                            <span className="rightbarInfoValue">{statistic.groupsJoined} .</span>
+                        </div>
+                    </div>
+                </div>
                 <h4 className="rightbarTitle">User friends</h4>
                 <div className="rightbarFollowings">
                     {friends.map((friend) => (
-                        <Link
+                        <Link 
+                            key= {friend.username}
                             to={'/profile/' + friend.username}
                             style={{ textDecoration: 'none' }}
                         >

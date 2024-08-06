@@ -15,12 +15,16 @@ export default function Profile() {
     const [user, setUser] = useState({});
     const username = useParams().username;
     const [updateCurrentUser, setupdateCurrentUser] = useState(false);
+    const [information,setInformation] = useState(0);
     const navigate = useNavigate();
 
     function infoUpdated(){
         setupdateCurrentUser(!updateCurrentUser);
-        console.log(user);
     }
+    function someUpdated(){
+        console.log('rendering some');
+        setInformation(prev => prev + 1);
+    };
   
     useEffect(() => {
         const fetchUser = async () => {
@@ -39,7 +43,7 @@ export default function Profile() {
         <>
             <NavBar />
             <div className="profile">
-                <Sidebar />
+                <Sidebar updateRightBar={someUpdated} />
                 <div className="profileRight">
                     <div className="profileRightTop">
                         <div className="profileCover">
@@ -67,8 +71,8 @@ export default function Profile() {
                         </div>
                     </div>
                     <div className="profileRightBottom">
-                        <Feed username={username} updateCurrentUser={updateCurrentUser} />
-                        {user && <RightbarProfile user={user} infoUpdated={infoUpdated} />}
+                        <Feed username={username} updateCurrentUser={updateCurrentUser} updateRightBar={someUpdated}  />
+                        {user && <RightbarProfile user={user} infoUpdated={infoUpdated} someUpdate={information} />}
                     </div>
                 </div>
             </div>

@@ -51,6 +51,7 @@ export default function EventForm(props) {
             
         }
         setDisableButton(false);
+        props?.rightBar();
         props.toggle();
     };
 

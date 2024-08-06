@@ -18,7 +18,7 @@
     margin-bottom: 20px;
 }
 
-.search-page input[type="text"] {
+.search-page input[type="search"] {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
