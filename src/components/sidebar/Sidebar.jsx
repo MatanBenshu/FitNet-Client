@@ -32,21 +32,29 @@ export default function Sidebar() {
 
     useEffect(() => {
         const fetchGroups = async () => {
-            const res = await axios.get('/groups/all/' + user._id);
-            console.log(res.data);  // Debugging purposes, remove this line in production!
-            setGroups(res.data);
+            try{
+                const res = await axios.get('/groups/all/' + user._id);
+                console.log(res.data);  // Debugging purposes, remove this line in production!
+                setGroups(res.data);
+            } catch (err) {
+                console.log(err);
+            }
         };
         fetchGroups();
-    }, [user._id,showFormGroup]);
+    }, [user,showFormGroup]);
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get('/events/all/' + user._id);
-            console.log(res.data);  // Debugging purposes, remove this line in production!
-            setEvents(res.data);
+            try{
+                const res = await axios.get('/events/all/' + user._id);
+                console.log(res.data);  // Debugging purposes, remove this line in production!
+                setEvents(res.data);
+            } catch (err) {
+                console.log(err);
+            }
         };
         fetchEvents();
-    }, [user._id,showFormEvent]);
+    }, [user,showFormEvent]);
 
     return (
         <>

@@ -13,6 +13,10 @@ export default function Share({handler}) {
     const [file, setFile] = useState(null);
     const [open, setOpen] = useState(false);
 
+    console.log(user);
+
+
+
     const handleClickOpen = () => {
         setOpen(true);
     };

@@ -5,7 +5,7 @@ import './feed.css';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 
-export default function Feed({ username }) {
+export default function Feed({ username,updateCurrentUser }) {
     const [render,reRender] = useState(0);
     const [posts, setPosts] = useState([]);
     const { user } = useContext(AuthContext);
@@ -31,14 +31,14 @@ export default function Feed({ username }) {
             }
         };
         fetchPosts();
-    }, [username, user._id,render]);
+    }, [username, user._id,render,updateCurrentUser]);
 
     return (
         <div className="feed">
             <div className="feedWrapper">
                 {(!username) && <Share handler={handleReRenderFeed}/>}
                 {posts.map((p) => (
-                    <Post key={p._id} post={p} handler={handleReRenderFeed} />
+                    <Post key={p._id} post={p} handler={handleReRenderFeed} updateCurrentUser={updateCurrentUser} />
                 ))}
             </div>
         </div>

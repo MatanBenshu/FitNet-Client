@@ -6,7 +6,7 @@ import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
-export default function Post({ post ,handler}) {
+export default function Post({ post ,handler,updateCurrentUser}) {
     const [save, setSave] = useState(post.savedBy.length);
     const [isSaved, setIsSaved] = useState(false);
     const [like, setLike] = useState(post.likes.length);
@@ -37,7 +37,7 @@ export default function Post({ post ,handler}) {
             }
         };
         fetchUser();
-    }, [post.userId]);
+    }, [post.userId,updateCurrentUser]);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -52,7 +52,7 @@ export default function Post({ post ,handler}) {
             fetchUser();
         }
         
-    }, [post.srcUser]);
+    }, [post.srcUser,updateCurrentUser]);
 
     const likeHandler = () => {
         if (currentUser._id !== post.userId) {

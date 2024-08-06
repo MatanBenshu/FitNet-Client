@@ -14,20 +14,26 @@ export default function Profile() {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const [user, setUser] = useState({});
     const username = useParams().username;
-    const [clickFollowBtn, setFollowing] = useState(0);
+    const [updateCurrentUser, setupdateCurrentUser] = useState(false);
     const navigate = useNavigate();
+
+    function infoUpdated(){
+        setupdateCurrentUser(!updateCurrentUser);
+        console.log(user);
+    }
   
     useEffect(() => {
         const fetchUser = async () => {
             try {
                 const res = await axios.get(`/users?username=${username}`);
+                console.log(res.data);
                 setUser(res.data);
             } catch (error) {
                 navigate('/page404');
             }
         };
         fetchUser();
-    }, [username,navigate,clickFollowBtn]);
+    }, [username,navigate,updateCurrentUser]);
   
     return (
         <>
@@ -61,8 +67,8 @@ export default function Profile() {
                         </div>
                     </div>
                     <div className="profileRightBottom">
-                        <Feed username={username} />
-                        <RightbarProfile user={user} handler={setFollowing} />
+                        <Feed username={username} updateCurrentUser={updateCurrentUser} />
+                        {user && <RightbarProfile user={user} infoUpdated={infoUpdated} />}
                     </div>
                 </div>
             </div>
