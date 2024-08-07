@@ -1,0 +1,54 @@
+.events-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+.events-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.event-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    transition: background-color 0.3s;
+}
+
+.event-item:hover {
+    background-color: #f9f9f9;
+}
+
+.event-name {
+    font-size: 18px;
+    font-weight: bold;
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+.event-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.join-button, .delete-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.join-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+}
