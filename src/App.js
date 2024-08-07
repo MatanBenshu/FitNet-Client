@@ -8,6 +8,7 @@ import About from './Pages/About/About.jsx';
 import Page404 from './Pages/Page404/Page404.jsx';
 import Profile from './Pages/Profile/Profile.jsx';
 import Search from './Pages/Search/Search.jsx';
+import Events from './Pages/Event/Event.jsx';
 
 function  App() {
     const { user } = useContext(AuthContext);
