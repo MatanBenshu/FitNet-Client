@@ -51,7 +51,7 @@ function  App() {
                             user ? <Search /> : <Navigate to="login" />
                         }
                     />
-                        <Route 
+                    <Route
                         path="Events" 
                         element={
                             user ? <Events /> : <Navigate to="login" />
