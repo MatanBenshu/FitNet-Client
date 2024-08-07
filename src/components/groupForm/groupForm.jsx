@@ -26,6 +26,7 @@ export default function GroupForm(props) {
             
         }
         setDisableButton(false);
+        props?.rightBar();
         props.toggle();
     };
 

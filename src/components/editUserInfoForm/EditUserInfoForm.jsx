@@ -14,7 +14,7 @@ import dayjs from 'dayjs';
 export default function EditUserInfoForm(props) {
 
     const [disableButtons, setDisableButton] = useState(false);
-    const { user} = useContext(AuthContext);
+    const { user,dispatch} = useContext(AuthContext);
     const [firstName,SetFirstName] = useState(user.firstName);
     const [lastName,SetLastName] = useState(user.lastName);
     const [dob,SetDob] = useState(dayjs(user.birthDate));
@@ -43,8 +43,6 @@ export default function EditUserInfoForm(props) {
             coverPicture: user.coverPicture,
         };
 
-        console.log(UpdateFields.profilePicture);
-        console.log(UpdateFields.coverPicture);
 
         if (file1) {
             const data = new FormData();
@@ -66,15 +64,10 @@ export default function EditUserInfoForm(props) {
                 await axios.post('/upload', data);
             } catch (err) {}
         }
-        console.log(UpdateFields.profilePicture );
-        console.log(UpdateFields.coverPicture);
-
-        console.log(UpdateFields);
 
         try {
             const response = await axios.post('/users/'+user._id, UpdateFields);
-            console.log(response.data);
-            //dispatch({ type: 'UPDATE_USER', payload: response.data });
+            dispatch({ type:'UPDATE_USER', payload:response.data });
         } catch (error) {     
         }
         setDisableButton(false);

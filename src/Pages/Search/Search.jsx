@@ -31,8 +31,9 @@ function Search() {
                 <h1>Search Users</h1>
                 <form onSubmit={handleSearch}>
                     <input
-                        type="text"
+                        type="search"
                         placeholder="Enter username"
+                        required
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                     />

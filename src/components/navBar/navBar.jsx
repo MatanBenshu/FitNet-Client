@@ -25,6 +25,7 @@ function NavBar() {
                         <li className='centerLink'>
                             <Link to={`/profile/${user.username}`}>Profile</Link>
                         </li>
+                        <li><Link to="/events">Events</Link></li>
                         <li className='centerLink'>
                             <Link to="/search">Search</Link>
                         </li>

@@ -63,6 +63,7 @@ export default function Post({ post ,handler,updateCurrentUser}) {
             }
             setLike(isLiked ? like - 1 : like + 1);
             setIsLiked(!isLiked);
+            handler();
         }
     };
     const savedHandler = () => {
@@ -74,10 +75,11 @@ export default function Post({ post ,handler,updateCurrentUser}) {
             }
             setSave(isSaved ? save - 1 : save + 1);
             setIsSaved(!isSaved);
+            handler();
         }
     };
     const shareHandler = () => {
-        if (currentUser._id!== post.userId ) {
+        if (currentUser._id !== post.userId && currentUser._id !== post.srcUser ) {
             let postId;
             try {
                 if (!srcUser._id){
