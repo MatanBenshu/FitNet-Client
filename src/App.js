@@ -8,7 +8,7 @@ import About from './Pages/About/About.jsx';
 import Page404 from './Pages/Page404/Page404.jsx';
 import Profile from './Pages/Profile/Profile.jsx';
 import Search from './Pages/Search/Search.jsx';
-import Events from './Pages/Event/Event.jsx';
+import Event from './Pages/Event/Event.jsx';
 
 function  App() {
     const { user } = useContext(AuthContext);
@@ -52,9 +52,9 @@ function  App() {
                         }
                     />
                     <Route
-                        path="Events" 
+                        path="event/:title"
                         element={
-                            user ? <Events /> : <Navigate to="login" />
+                            user ? <Event/> : <Navigate to="login" />
                         }
                     />
                     <Route
