@@ -50,6 +50,12 @@ function  App() {
                             user ? <Search /> : <Navigate to="login" />
                         }
                     />
+                            <Route 
+                        path="Events" 
+                        element={
+                            user ? <Events /> : <Navigate to="login" />
+                        }
+                    />
                     <Route
                         path="page404"
                         element={<Page404 /> }
