@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './Friend.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function Friend({participant}) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -9,7 +10,8 @@ export default function Friend({participant}) {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await axios.get(`/users?userId =${participant}`);
+                console.log(participant);
+                const res = await axios.get(`/users?userId=${participant}`);
                 console.log(res.data);
                 setUser(res.data);
             } catch (error) {
@@ -19,9 +21,22 @@ export default function Friend({participant}) {
     }, [participant]);
 
     return (
-        <li className="sidebarFriend">
-            <img className="sidebarFriendImg" src={PF+user.profilePicture} alt="" />
-            <span className="sidebarFriendName">{user.username}</span>
-        </li>
+        
+        (user && (
+            <Link
+                key ={user.username}
+                to={`/profile/${user.username}`}
+                style={{ textDecoration: 'none', color: 'black' }}
+            >
+                <li className="sidebarFriend">
+                    <img className="sidebarFriendImg"
+                        src={
+                            user.profilePicture
+                                ? PF + user.profilePicture
+                                : PF + 'person/noAvatar.png'
+                        } alt="" />
+                    <span className="sidebarFriendName">{user.username}</span>
+                </li></Link>))
+
     );
 }

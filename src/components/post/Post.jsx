@@ -5,6 +5,8 @@ import axios from 'axios';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import Badge from '@mui/material/Badge';
+import { grey } from '@mui/material/colors';
 
 export default function Post({ post ,handler,updateCurrentUser}) {
     const [save, setSave] = useState(post.savedBy.length);
@@ -188,26 +190,26 @@ export default function Post({ post ,handler,updateCurrentUser}) {
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
-                        <img
-                            className="likeSaveShareIcon"
-                            src={`${PF}like.png`}
-                            onClick={likeHandler}
-                            alt="like"
-                        />
-                        <img
-                            className="likeSaveShareIcon"
-                            src={`${PF}heart.png`}
-                            onClick={savedHandler}
-                            alt="save"
-                        />
+                        <Badge badgeContent={like} color={grey[500]} showZero>
+                            <img
+                                className="likeSaveShareIcon"
+                                src={`${PF}like.png`}
+                                onClick={likeHandler}
+                                alt="like"
+                            /></Badge>
+                        <Badge badgeContent={save} color={grey[500]} showZero>
+                            <img
+                                className="likeSaveShareIcon"
+                                src={`${PF}heart.png`}
+                                onClick={savedHandler}
+                                alt="save"
+                            /></Badge>
                         <img
                             className="likeSaveShareIcon"
                             src={`${PF}share.png`}
                             onClick={shareHandler}
                             alt="share"
                         />
-                        <span className="postLikeCounter">{like} likes </span>
-                        <span className="postLikeCounter">{save} saved </span>
                     </div>
                     <div className="postBottomRight">
                         <DeleteForever className='postMenu' color='error' onClick={handleDelete}/>

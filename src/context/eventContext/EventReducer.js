@@ -11,6 +11,25 @@ const EventReducer = (state, action) => {
             ...state,
             eventFetching: true,
         };
+    
+    case 'ADD_ATTENDEE':
+        return {
+            ...state,
+            event: {
+                ...state.event,
+                attendees: [...state.event.attendees, action.payload],
+            },
+        };
+    case 'REMOVE_ATTENDEE':
+        return {
+            ...state,
+            event: {
+                ...state.event,
+                attendees: state.event.attendees.filter(attendee => attendee!== action.payload),
+            },
+        };
+
+    case 'UPDATE_EVENT':
     default:
         return state;
     }

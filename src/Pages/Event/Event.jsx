@@ -7,6 +7,8 @@ import { EventContextProvider } from '../../context/eventContext/EventContext';
 import { EventContext } from '../../context/eventContext/EventContext';
 import CircularProgress from '@mui/material/CircularProgress';
 import SidebarEvent from '../../components/sidebar/SideBarEvent';
+import EventMiddlePage from '../../components/eventMiddlePage/EventMiddlePage';
+import RightbarEvent from '../../components/rightbar/RightbarEvent';
 
 
 
@@ -57,8 +59,8 @@ export function Event() {
     return (
         <div className="eventContainer">
             <SidebarEvent/>
-            <SidebarEvent/>
-            <SidebarEvent/>
+            <EventMiddlePage/>
+            <RightbarEvent/>
         </div>
     );
 }
