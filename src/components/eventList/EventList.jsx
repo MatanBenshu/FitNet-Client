@@ -1,7 +1,7 @@
 
 import {List, Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import EventListItems from '../eventListItem/EventListItem';
+import EventListItems from './EventListItem';
 
 export default function EventList({event,title,}) {
 

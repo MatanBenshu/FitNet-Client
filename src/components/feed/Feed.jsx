@@ -14,7 +14,6 @@ export default function Feed({ username,updateCurrentUser,updateRightBar }) {
     const [posts, setPosts] = useState([]);
     const { user } = useContext(AuthContext);
     const [value, setValue] = useState(0);
-    console.log(value);
 
     function handleReRenderFeed ()  {
         reRender(perv =>perv +1);
@@ -28,10 +27,30 @@ export default function Feed({ username,updateCurrentUser,updateRightBar }) {
 
     useEffect(() => {
         const fetchPosts = async () => {
+
             try {
-                const res = username
-                    ? await axios.get('/posts/profile/' + username)
-                    : await axios.get('posts/timeline/' + user._id);
+                let res; 
+                if(!username){
+                    res = await axios.get('posts/timeline/' + user._id);
+                }else if(username !== user.username)
+                {
+                    res = await axios.get('/posts/profile/' + username);
+                }else{
+                    switch(value){
+                    case 0:
+                        res = await axios.get('/posts/profile/' + username);
+                        break;
+                    case 1:
+                        res = await axios.get('/posts/likes/' + username);
+                        break;
+                    case 2:
+                        res = await axios.get('/posts/saved/' + username);
+                        break;
+                    default:
+                        res = await axios.get('/posts/timeline/' + username);
+                        break;
+                    }
+                }
                 setPosts(
                     res.data.sort((p1, p2) => {
                         return new Date(p2.createdAt) - new Date(p1.createdAt);
@@ -41,13 +60,14 @@ export default function Feed({ username,updateCurrentUser,updateRightBar }) {
                 
             }
         };
+
         fetchPosts();
-    }, [username, user._id,render,updateCurrentUser]);
+    }, [username, user,render,updateCurrentUser,value]);
 
     return (
         <div className="feed">
             <div className="feedWrapper">
-                {(username)&&
+                {(username)&&(username===user.username)&&
                 <div className='TabsContainer'>
                     <Tabs
                         value={value}

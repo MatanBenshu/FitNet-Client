@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import NavBar from '../../components/navBar/navBar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Feed from '../../components/feed/Feed';
-//import Rightbar from '../../components/rightbar/Rightbar';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
 import './Profile.css';
-import { useEffect, useState } from 'react';
+import {  useState  } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import RightbarProfile from '../../components/rightbar/RightbarProfile';
