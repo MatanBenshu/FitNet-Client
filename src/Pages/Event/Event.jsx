@@ -1,7 +1,8 @@
 import './Event.css'; 
 import { useLocation ,useNavigate, useParams} from 'react-router-dom';
 import { useEffect, useContext } from 'react';
-import axios from '../../Api';
+import axios,{ WEATHER_API_URL, WEATHER_API_KEY} from '../../Api';
+import defAxios from 'axios';
 import NavBar from '../../components/navBar/navBar';
 import { EventContextProvider } from '../../context/eventContext/EventContext';
 import { EventContext } from '../../context/eventContext/EventContext';
@@ -34,12 +35,25 @@ export function Event() {
         const fetchEvent = async () => {
             try{
                 eventDispatch({type: 'FETCH_EVENT'});
-                const res = await axios.get('/events/' + eventId);
-                if(res.data.title !== eventTitle)
+
+                const eventRes = await axios.get('/events/' + eventId);
+                eventDispatch({type: 'SET_EVENT', payload: eventRes.data});
+                if(eventRes.data.title !== eventTitle)
                 {
                     navigate('/page404');
                 }
-                eventDispatch({type: 'SET_EVENT', payload: res.data});
+
+                const ownerRes = await axios.get(`/users?userId=${eventRes.data.userId}`);
+                eventDispatch({type: 'SET_OWNER', payload: ownerRes.data});
+
+                const [lat, lon] = eventRes.data.location.value.split(' ');
+                const weatherRes = await defAxios
+                (`${WEATHER_API_URL}lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEY}`);
+                eventDispatch({type: 'SET_WEATHER', payload: weatherRes.data});
+                console.log(weatherRes);
+
+                eventDispatch({type: 'STOP_FETCH'});
+
             } catch (err) {
                 navigate('/page404');
             }

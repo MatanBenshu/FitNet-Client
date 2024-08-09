@@ -2,8 +2,8 @@ const EventReducer = (state, action) => {
     switch (action.type) {
     case 'SET_EVENT':
         return {
+            ...state,
             event: action.payload,
-            eventFetching: false,
         };
         
     case 'FETCH_EVENT':
@@ -26,6 +26,7 @@ const EventReducer = (state, action) => {
                 attendees: [...state.event.attendees, action.payload],
             },
         };
+
     case 'REMOVE_ATTENDEE':
         return {
             ...state,
@@ -35,7 +36,18 @@ const EventReducer = (state, action) => {
             },
         };
 
-    case 'UPDATE_EVENT':
+    case 'SET_OWNER': 
+        return {
+            ...state,
+            owner: action.payload
+        };  
+        
+    case 'SET_WEATHER': 
+        return {
+            ...state,
+            weather: action.payload
+        };  
+
     default:
         return state;
     }

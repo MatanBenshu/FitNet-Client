@@ -1,4 +1,4 @@
-.popup {
+.popupEvent{
     position: fixed;
     z-index: 1;
     left: 0;
@@ -9,7 +9,7 @@
     background-color: rgba(0,0,0,0.4);
     }
     
-    .popup-inner {
+    .popup-innerEvent {
     background-color: rgb(227, 226, 226);
     position: absolute;
     left: 50%;
@@ -21,7 +21,7 @@
     width: 60%;
     }
     
-    h2 {
+    .eventFormTitle {
     font-size: 24px;
     text-align: center;
     color: rgb(53, 117, 219) ;
@@ -31,7 +31,7 @@
         display: flex;
         flex-direction: column;
     }
-    .topFormContainer{
+    .topEventFormContainer{
         width: 100%;
         margin-bottom: 10px;
         display: flex;
@@ -39,49 +39,52 @@
         justify-content:center;
     }
 
-    .middleFormContainer{
+    .middleEventFormContainer{
         width: 100%;
         margin: 30px 0px;
         display: flex;
         align-items: center;
         justify-content:space-around;
     }
-    .middleFormItem{
+    .middleEventFormItem{
         display: flex;
         flex-direction: column;
     }
 
-    .lowerForm{
+    .lowerEventForm{
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-around;
     }
-    .lowerFormItem{
+    .lowerEventFormItem{
         display: flex;
         width: 45%;
         flex-direction: column;
         align-items: center;
     }
+    .CitiesSearcher{
+        width: 250px;
+    }
 
-    .shareImgContainer{
+    .shareEventImgContainer{
         width: 50%;
         padding: 0 20px 10px 20px;
         position: relative;
       }
 
-      .shareImg{
+      .shareEventImg{
         width: 100%;
         object-fit: cover;
       }
-      .shareCancelImg{
+      .shareEventCancelImg{
         cursor: pointer;
       }
 
 
     
-    .submitButton,
-    .CancelButton {
+    .submitEventButton,
+    .CancelEventButton {
     color: white;
     border: none;
     padding: 10px 20px;
@@ -94,36 +97,36 @@
     border-radius: 5px;
     }
     
-    .buttons{
+    .eventButtons{
         display: flex ;
         width: 100%;
         justify-content:space-evenly;
     }
     
-    .submitButton {
+    .submitEventButton {
     background-color: #45a049;
     margin-top: 20px;
     }
-    .submitButton:hover {
+    .submitEventButton:hover {
     background-color: #4CAF50;
     }
     
-    .CancelButton {
+    .CancelEventButton {
     margin-top: 20px;
     background-color: #f44336;
     }
     
-    .CancelButton:hover {
+    .CancelEventButton:hover {
     background-color: #da190b;
     }
     
-    .submitButton:disabled {
+    .submitEventButton:disabled {
     background-color: #bfbfbf;
     color: #ffffff;
     cursor: not-allowed;
     }
     
-    .CancelButton:disabled {
+    .CancelEventButton:disabled {
     background-color: #bfbfbf;
     color: #ffffff;
     cursor: not-allowed;

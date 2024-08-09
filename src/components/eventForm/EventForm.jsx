@@ -5,14 +5,16 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker,TimePicker } from '@mui/x-date-pickers';
 import TextField from '@mui/material/TextField';
 import './EventForm.css';
-import axios from '../../Api.js';
+import axios ,{ geoApiOptions, GEO_API_URL } from '../../Api.js';
 import { Cancel, PermMedia } from '@mui/icons-material';
+import { AsyncPaginate } from 'react-select-async-paginate';
 
 export default function EventForm(props) {
 
     const [disableButtons, setDisableButton] = useState(false);
     const [title, setTitle] = useState('');
-    const [location, setLocation] = useState('');
+    const [location, setLocation] = useState(null);
+    //const [longitude, setLongitude] = useState('');
     const [file, setFile] = useState(null);
     const [startDate, setStartDate] = useState(null);
     const [timeStart, setTimeStart] = useState(null);
@@ -20,11 +22,35 @@ export default function EventForm(props) {
     const { user} = useContext(AuthContext);
 
 
+    const loadOptions = async (inputValue) => {
+        return await fetch(
+            `${GEO_API_URL}/cities?countryIds=IL&namePrefix=${inputValue}`,
+            geoApiOptions
+        )
+            .then((response) => response.json())
+            .then((response) => {
+                return {
+                    options: response.data.map((city) => {
+                        return {
+                            value: `${city.latitude} ${city.longitude}`,
+                            label: `${city.name}, ${city.countryCode}`,
+                        };
+                    }),
+                };
+            });
+    };
+
+    const handleOnLocationChange = (searchData) => {
+        console.log(searchData);
+        setLocation(searchData);
+    };
+
+
     const  handleCreation =  async (e)  => {
         e.preventDefault();
         setDisableButton(true);
         
-        if (!title ||!location ||!startDate ||!timeStart ) {
+        if (!title ||!location.value ||!startDate ||!timeStart ) {
             alert('Please fill all fields');
             setDisableButton(false);
             return;
@@ -64,12 +90,12 @@ export default function EventForm(props) {
     };
 
     return (
-        <div className="popup">
-            <div className="popup-inner">
-                <h2>Create Event</h2>
+        <div className="popupEvent">
+            <div className="popup-innerEvent">
+                <h2 className='eventFormTitle'>Create Event</h2>
                 <form className='EventForm' onSubmit={handleCreation}>
-                    <div className='topFormContainer'>
-                        <TextField id="Title" 
+                    <div className='topEventFormContainer'>
+                        <TextField id="EventTitle" 
                             label="Event Title" 
                             variant="outlined"
                             required
@@ -77,17 +103,17 @@ export default function EventForm(props) {
                           
                         />
                     </div>
-                    <div className='middleFormContainer'>
-                        <div className='middleFormItem'>
-                            <TextField id="location" 
-                                label="Event Location" 
-                                variant="outlined"
-                                required
-                                onChange={(e) => setLocation(e.target.value)}  
-                              
+                    <div className='middleEventFormContainer'>
+                        <div className='middleEventFormItem'>
+                            <AsyncPaginate className='CitiesSearcher'
+                                placeholder="Search for city"
+                                debounceTimeout={1100}
+                                value={location}
+                                onChange={handleOnLocationChange}
+                                loadOptions={loadOptions}
                             />
                         </div>
-                        <div className='middleFormItem' >
+                        <div className='middleEventFormItem' >
                             <LocalizationProvider dateAdapter={AdapterMoment}>
                                 <DatePicker 
                                     label="Event Date"
@@ -98,7 +124,7 @@ export default function EventForm(props) {
                                 />
                             </LocalizationProvider>
                         </div>
-                        <div className='middleFormItem'>
+                        <div className='middleEventFormItem'>
                             <LocalizationProvider dateAdapter={AdapterMoment}>
                                 <TimePicker 
                                     label="Event Time"
@@ -109,8 +135,8 @@ export default function EventForm(props) {
                             </LocalizationProvider>
                         </div>
                     </div>
-                    <div className='lowerForm'>
-                        <div className='lowerFormItem'>
+                    <div className='lowerEventForm'>
+                        <div className='lowerEventFormItem'>
                             <TextField 
                                 id="Description"
                                 label="Event Description" 
@@ -121,7 +147,7 @@ export default function EventForm(props) {
                                 onChange={(e) => setDesc(e.target.value)}
                             />
                         </div>
-                        <div className='lowerFormItem'>
+                        <div className='lowerEventFormItem'>
                             <label htmlFor="file" className="shareOption">
                                 <PermMedia htmlColor="tomato" className="shareIcon" />
                                 <span className="shareOptionText">Upload Photo</span>
@@ -134,16 +160,16 @@ export default function EventForm(props) {
                                 />
                             </label>
                             {file && (
-                                <div className="shareImgContainer">
-                                    <img className="shareImg" src={URL.createObjectURL(file)} alt="" />
-                                    <Cancel className="shareCancelImg" onClick={() => setFile(null)} />
+                                <div className="shareEventImgContainer">
+                                    <img className="shareEventImg" src={URL.createObjectURL(file)} alt="" />
+                                    <Cancel className="shareEventCancelImg" onClick={() => setFile(null)} />
                                 </div>
                             )}
                         </div>
                     </div>
-                    <div className='buttons'>
-                        <button className='CancelButton' onClick={props.toggle} disabled={disableButtons}>Cancel</button>
-                        <button className='submitButton' type="submit" disabled={disableButtons}>Create</button>
+                    <div className='eventButtons'>
+                        <button className='CancelEventButton' onClick={props.toggle} disabled={disableButtons}>Cancel</button>
+                        <button className='submitEventButton' type="submit" disabled={disableButtons}>Create</button>
                     </div>
                 </form>
             </div>
