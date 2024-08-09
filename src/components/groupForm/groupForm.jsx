@@ -1,7 +1,7 @@
 import { useRef,useState,useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext.js';
 import './groupForm.css';
-import axios from 'axios';
+import axios from '../../Api.js';
 
 export default function GroupForm(props) {
 

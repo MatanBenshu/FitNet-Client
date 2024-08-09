@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Search.css';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navBar/navBar'; 
+import axios from '../../Api';
 
 function Search() {
     const [query, setQuery] = useState('');
@@ -12,9 +13,8 @@ function Search() {
         event.preventDefault();
         
         try {
-            const response = await fetch(`/users/search?query=${query}`);
-            const data = await response.json();
-            setResults(data);
+            const response = await axios.get(`/users/search?query=${query}`);
+            setResults(response.data);
         } catch (error) {
             console.error('Error searching for users:', error);
         }

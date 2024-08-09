@@ -1,7 +1,7 @@
 import './post.css';
 import {Edit ,SaveAs,DeleteForever} from '@mui/icons-material';
 import { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../../Api';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';

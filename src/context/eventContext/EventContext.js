@@ -2,7 +2,17 @@ import { createContext, useReducer } from 'react';
 import EventReducer from './EventReducer';
 
 const INITIAL_STATE = {
-    event:null,
+    event:{
+        userId: '',
+        title: '',
+        location: '',
+        date: '',
+        startTime: '',
+        desc: '',
+        img: '',
+        group:'',
+        attendees:[],
+    },
     eventFetching: false,
 };
 

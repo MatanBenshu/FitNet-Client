@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './About.css';
-import axios from 'axios';
+import axios from '../../Api';
 import NavBar from '../../components/navBar/navBar';
 
 const About = () => {

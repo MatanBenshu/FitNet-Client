@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext.js';
 import NavBar from '../../components/navBar/navBar';
-import axios from 'axios';
+import axios from '../../Api.js';
 import './Register.css';
 
 function Register() {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Friend.css';
-import axios from 'axios';
+import axios from '../../Api';
 import { Link } from 'react-router-dom';
 
 export default function Friend({participant}) {

@@ -5,7 +5,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker,TimePicker } from '@mui/x-date-pickers';
 import TextField from '@mui/material/TextField';
 import './EventForm.css';
-import axios from 'axios';
+import axios from '../../Api.js';
 import { Cancel, PermMedia } from '@mui/icons-material';
 
 export default function EventForm(props) {
@@ -23,6 +23,12 @@ export default function EventForm(props) {
     const  handleCreation =  async (e)  => {
         e.preventDefault();
         setDisableButton(true);
+        
+        if (!title ||!location ||!startDate ||!timeStart ) {
+            alert('Please fill all fields');
+            setDisableButton(false);
+            return;
+        }
 
         let img = '';
 
@@ -51,7 +57,9 @@ export default function EventForm(props) {
             
         }
         setDisableButton(false);
-        props?.rightBar();
+        if (props.rightBar){
+            props.rightBar();
+        }
         props.toggle();
     };
 

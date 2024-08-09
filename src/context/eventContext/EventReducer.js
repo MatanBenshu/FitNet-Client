@@ -11,6 +11,12 @@ const EventReducer = (state, action) => {
             ...state,
             eventFetching: true,
         };
+        
+    case 'STOP_FETCH':
+        return {
+            ...state,
+            eventFetching: false,
+        };
     
     case 'ADD_ATTENDEE':
         return {

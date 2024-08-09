@@ -7,6 +7,10 @@ export const UpdateEvent = (event) => ({
 export const FetchingEvent = () => ({
     type: 'FETCH_EVENT',
 });
+export const FetchingSuccess = () => ({
+    type: 'STOP_FETCH',
+});
+
 
 export const AddAttendee = (attendee) => ({
     type: 'ADD_ATTENDEE',

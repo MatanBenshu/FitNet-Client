@@ -5,7 +5,8 @@ import { AuthContext } from '../../context/AuthContext';
 import {PersonAdd,PersonRemove} from '@mui/icons-material';
 import {Divider,Chip} from '@mui/material';
 import Friend from '../friend/Friend';
-import axios from 'axios';
+
+import axios from '../../Api';
 
 
 

@@ -7,7 +7,7 @@ import { DatePicker } from '@mui/x-date-pickers';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import './EditUserInfoForm.css';
-import axios from 'axios';
+import axios from '../../Api.js';
 import { Cancel, PermMedia,Replay} from '@mui/icons-material';
 import dayjs from 'dayjs';
 

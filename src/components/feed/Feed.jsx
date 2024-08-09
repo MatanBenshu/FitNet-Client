@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import Post from '../post/Post';
 import Share from '../share/Share';
 import './feed.css';
-import axios from 'axios';
+import axios from '../../Api';
 import { AuthContext } from '../../context/AuthContext';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';

@@ -1,7 +1,7 @@
 import './Event.css'; 
 import { useLocation ,useNavigate, useParams} from 'react-router-dom';
 import { useEffect, useContext } from 'react';
-import axios from 'axios';
+import axios from '../../Api';
 import NavBar from '../../components/navBar/navBar';
 import { EventContextProvider } from '../../context/eventContext/EventContext';
 import { EventContext } from '../../context/eventContext/EventContext';
@@ -28,8 +28,7 @@ export function Event() {
     const eventId = new URLSearchParams(location.search).get('id');
     const eventTitle = useParams().title;
     const navigate = useNavigate();
-    const {event, eventFetching,eventDispatch} = useContext(EventContext);
-    console.log(event);
+    const {eventFetching,eventDispatch} = useContext(EventContext);
 
     useEffect(() => {
         const fetchEvent = async () => {

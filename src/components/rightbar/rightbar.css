@@ -122,3 +122,38 @@
 .ownertag{
   margin: 15px;
 }
+
+.ownerEventMenu{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.OwnerButtonDelete,
+.OwnerButtonEdit{
+  width: 40%;
+  margin-top: 10px;
+  font-size: 14px;
+  padding: 10px ;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  border: none ;
+  transition-duration: 0.4s;
+
+}
+
+.OwnerButtonDelete{
+  background-color: rgb(238, 51, 51);
+  &:hover{
+    background-color: rgb(165, 5, 5);
+  }
+}
+
+.OwnerButtonEdit{
+  background-color: #302de9;
+  &:hover{
+    background-color: #0b0986;
+  }
+}

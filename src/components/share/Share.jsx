@@ -3,7 +3,7 @@ import {PermMedia, EmojiEmotions, Cancel} from '@mui/icons-material';
 import {Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
 import { useContext, useRef, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import axios from 'axios';
+import axios from '../../Api';
 import EmojiPicker from 'emoji-picker-react';
 
 export default function Share({handler}) {

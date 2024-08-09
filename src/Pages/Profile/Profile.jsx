@@ -6,7 +6,7 @@ import { useNavigate  } from 'react-router-dom';
 import './Profile.css';
 import {  useState  } from 'react';
 import { useParams } from 'react-router';
-import axios from 'axios';
+import axios from '../../Api';
 import RightbarProfile from '../../components/rightbar/RightbarProfile';
 
 export default function Profile() {
