@@ -27,7 +27,7 @@ export default function RightBar() {
     const HomeRightbar = () => {
         return (
             <>
-                <img className="rightbarAd" src= {PF + 'FitNetLogo.png'} alt="" />
+                <img className="rightbarAd" src= {PF + 'FitNetLogo.png'} alt="FitNet" />
                 <h4 className="rightbarTitle">User friends</h4>
                 <div className="rightbarFollowings">
                     {friends.map((friend) => (
