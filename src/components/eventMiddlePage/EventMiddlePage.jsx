@@ -2,10 +2,12 @@
 import './EventMiddlePage.css';
 import { EventContext } from '../../context/eventContext/EventContext';
 import { useContext } from 'react';
+import CurrentWeather from '../weather/Weather';
 
 export default function EventMiddlePage(){
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-    const {event} = useContext(EventContext);
+    const {event,weather} = useContext(EventContext);
+    console.log(weather);
 
 
 
@@ -27,13 +29,14 @@ export default function EventMiddlePage(){
                     </div>
                     <div className='eventDetailsItem'>
                         <h2>Location:</h2>
-                        <p>{event.location}</p>
+                        <p>{event.location.label}</p>
                     </div>
                 </div>
                 <div className='eventImgAndWeather'>
-                    {event.img && <img className='eventDetailImg' src={PF+event.img} alt={event.title} />}
+                    {event.img ? <img className='eventDetailImg' src={PF+event.img} alt={event.title} />:
+                        <img className='eventDetailImg' src={PF +'FitNetLogo.png'} alt={event.title}/>}
                     <div className='eventDetailWeather'>
-
+                        {weather? <CurrentWeather/>:null}
                     </div>
                 </div>
                 
