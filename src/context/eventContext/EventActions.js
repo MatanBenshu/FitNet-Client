@@ -1,4 +1,4 @@
-export const UpdateEvent = (event) => ({
+export const SetEvent = (event) => ({
     type: 'SET_EVENT',
     payload: event,
 });
@@ -19,6 +19,10 @@ export const UpdateWeather = (weather) => ({
 
 export const FetchingSuccess = () => ({
     type: 'STOP_FETCH',
+});
+
+export const UpdateEvent= () => ({
+    type: 'UPDATE_EVENT',
 });
 
 export const AddAttendee = (attendee) => ({

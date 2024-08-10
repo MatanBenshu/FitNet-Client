@@ -3,7 +3,7 @@ import Post from '../post/Post';
 import Share from '../share/Share';
 import './feed.css';
 import axios from '../../Api';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../context/authContext/AuthContext';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import {Favorite, ThumbUp,PersonPin} from '@mui/icons-material';

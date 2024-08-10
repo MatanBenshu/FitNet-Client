@@ -19,7 +19,7 @@
     font-size: 40px;
     margin: 30px 0;
     color:azure;
-    text-shadow: 1px 1px 2px black, 0 0 8px blue, 0 0 5px darkblue;
+    text-shadow: 1px 1px 2px black, 0 0 8px #ff8800, 0 0 5px #ca6c00;
     text-transform: capitalize;
     text-align: center;
 }
@@ -54,7 +54,7 @@
 }
 .eventDetailsItem h2{
     margin-bottom: 5px;
-    color: #4444a9;
+    color: #ff8800;
     font-size: 25px;
 
 }

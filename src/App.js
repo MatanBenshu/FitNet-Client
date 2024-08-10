@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { AuthContext } from './context/AuthContext.js';
+import { AuthContext } from './context/authContext/AuthContext.js';
 import Register from './Pages/Register/Register.jsx';
 import Home from './Pages/Home/Home.jsx';
 import Login from './Pages/Login/login.jsx';

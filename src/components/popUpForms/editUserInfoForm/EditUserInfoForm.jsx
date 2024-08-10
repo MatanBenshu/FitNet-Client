@@ -1,13 +1,13 @@
 
 import { useState,useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext.js';
+import { AuthContext } from '../../../context/authContext/AuthContext.js';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import './EditUserInfoForm.css';
-import axios from '../../Api.js';
+import axios from '../../../Api.js';
 import { Cancel, PermMedia,Replay} from '@mui/icons-material';
 import dayjs from 'dayjs';
 

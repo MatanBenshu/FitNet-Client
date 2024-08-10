@@ -5,6 +5,7 @@ const customAxios = axios.create({
     timeout: 5000,
 });
 
+export const GEO_API_URL = 'https://wft-geo-db.p.rapidapi.com/v1/geo';
 export const geoApiOptions = {
     method: 'GET',
     headers: {
@@ -13,7 +14,7 @@ export const geoApiOptions = {
     },
 };
 
-export const GEO_API_URL = 'https://wft-geo-db.p.rapidapi.com/v1/geo';
+
 export const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/weather?';
 export const WEATHER_API_KEY = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
 
