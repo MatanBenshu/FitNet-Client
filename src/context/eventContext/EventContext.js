@@ -3,6 +3,7 @@ import EventReducer from './EventReducer';
 
 const INITIAL_STATE = {
     event:{
+        _id: '',
         userId: '',
         title: '',
         location: {value: '', label: ''},
@@ -13,7 +14,6 @@ const INITIAL_STATE = {
         group:'',
         attendees:[],
     },
-    eventFetching: false,
     owner: {
         _id:'',
         username: '',
@@ -24,10 +24,9 @@ const INITIAL_STATE = {
         weather: [{description: '' ,icon:''}],
         main: {temp: '', feels_like: '', pressure: '', humidity: ''},
         wind: {speed: ''},
-
-
-
     },
+    eventFetching: false,
+    eventUpdate: false,
 };
 
 export const EventContext = createContext(INITIAL_STATE);
@@ -43,6 +42,7 @@ export  const EventContextProvider = ({ children }) => {
                 eventFetching: state.eventFetching,
                 owner: state.owner,
                 weather: state.weather,
+                eventUpdate: state.eventUpdate,
                 eventDispatch,
             }}
         >

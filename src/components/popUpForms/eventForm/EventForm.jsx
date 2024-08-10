@@ -1,25 +1,34 @@
 import { useState,useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext.js';
+import { AuthContext } from '../../../context/authContext/AuthContext.js';
+import { EventContext } from '../../../context/eventContext/EventContext.js';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker,TimePicker } from '@mui/x-date-pickers';
 import TextField from '@mui/material/TextField';
 import './EventForm.css';
-import axios ,{ geoApiOptions, GEO_API_URL } from '../../Api.js';
+import axios ,{ geoApiOptions, GEO_API_URL } from '../../../Api.js';
 import { Cancel, PermMedia } from '@mui/icons-material';
 import { AsyncPaginate } from 'react-select-async-paginate';
+import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function EventForm(props) {
 
-    const [disableButtons, setDisableButton] = useState(false);
-    const [title, setTitle] = useState('');
-    const [location, setLocation] = useState(null);
-    //const [longitude, setLongitude] = useState('');
-    const [file, setFile] = useState(null);
-    const [startDate, setStartDate] = useState(null);
-    const [timeStart, setTimeStart] = useState(null);
-    const [Desc, setDesc] = useState('');
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    const navigate = useNavigate();
+
+    const {event,eventDispatch} = useContext(EventContext);
     const { user} = useContext(AuthContext);
+
+    const [title, setTitle] = useState(event.title);
+    const [location, setLocation] = useState(event.location);
+    const [file, setFile] = useState(null);
+    const [startDate, setStartDate] = useState(event.date!==''? moment(event.date,'DD-MM-YYYY'):null);
+    const [timeStart, setTimeStart] = useState(event.startTime!==''? moment(event.startTime,'HH:mm:ss'):null);
+    const [Desc, setDesc] = useState(event.desc);
+    const [eventImg,setEventImg] = useState(event.img);
+    const [disableButtons, setDisableButton] = useState(false);
 
 
     const loadOptions = async (inputValue) => {
@@ -41,7 +50,6 @@ export default function EventForm(props) {
     };
 
     const handleOnLocationChange = (searchData) => {
-        console.log(searchData);
         setLocation(searchData);
     };
 
@@ -56,7 +64,7 @@ export default function EventForm(props) {
             return;
         }
 
-        let img = '';
+        let img = eventImg;
 
         if (file) {
             const data = new FormData();
@@ -69,18 +77,40 @@ export default function EventForm(props) {
             } catch (err) {}
         }
 
-        try {
-            await axios.post('/events',{
-                userId:user._id,
-                title:title,
-                desc: Desc,
-                location:location,
-                date:startDate,
-                startTime: timeStart,
-                img: img,
-            });
-        } catch (error) {
-            
+        if(event._id === ''){
+            try {
+                console.log('Creating event');
+                await axios.post('/events',{
+                    userId:user._id,
+                    title:title,
+                    desc: Desc,
+                    location:location,
+                    date:startDate.format('DD-MM-YYYY'),
+                    startTime: timeStart.format('HH:mm:ss'),
+                    img: img,
+                });
+            } catch (error) {}
+        }else{
+            try {
+                console.log('Updating event');
+                const res = await axios.post(`/events/update/${event._id}`,{
+                    userId:user._id,
+                    title:title,
+                    desc: Desc,
+                    location:location,
+                    date:startDate.format('DD-MM-YYYY'),
+                    startTime: timeStart.format('HH:mm:ss'),
+                    img: img,
+                });
+                const updatedEvent = res.data;
+                if (updatedEvent.title !== event.title) {
+                    navigate(`/event/${updatedEvent.title}?id=${updatedEvent._id}`);
+                }else{
+                    eventDispatch({type:'UPDATE_EVENT'});
+                }
+            } catch (error) {
+                console.log( 'error on event update: ',error);
+            }
         }
         setDisableButton(false);
         if (props.rightBar){
@@ -92,13 +122,14 @@ export default function EventForm(props) {
     return (
         <div className="popupEvent">
             <div className="popup-innerEvent">
-                <h2 className='eventFormTitle'>Create Event</h2>
+                <h2 className='eventFormTitle'>{event.title===''? 'Create Event':'Update Event' }</h2>
                 <form className='EventForm' onSubmit={handleCreation}>
                     <div className='topEventFormContainer'>
                         <TextField id="EventTitle" 
                             label="Event Title" 
                             variant="outlined"
                             required
+                            value={title}
                             onChange={(e) => setTitle(e.target.value)}
                           
                         />
@@ -117,7 +148,8 @@ export default function EventForm(props) {
                             <LocalizationProvider dateAdapter={AdapterMoment}>
                                 <DatePicker 
                                     label="Event Date"
-                                    onChange={(newDate) => setStartDate(newDate.format('YYYY-MM-DD'))}
+                                    value={startDate}
+                                    onChange={(newDate) => setStartDate(newDate)}
                                     disablePast={true}
                                     required
                                    
@@ -128,7 +160,8 @@ export default function EventForm(props) {
                             <LocalizationProvider dateAdapter={AdapterMoment}>
                                 <TimePicker 
                                     label="Event Time"
-                                    onChange={(newTime) => setTimeStart(newTime.format('HH:mm:ss'))}
+                                    value={timeStart}
+                                    onChange={(newTime) => setTimeStart(newTime)}
                                     required
                                    
                                 />
@@ -140,6 +173,7 @@ export default function EventForm(props) {
                             <TextField 
                                 id="Description"
                                 label="Event Description" 
+                                value={Desc}
                                 variant="outlined"
                                 multiline
                                 fullWidth
@@ -165,11 +199,22 @@ export default function EventForm(props) {
                                     <Cancel className="shareEventCancelImg" onClick={() => setFile(null)} />
                                 </div>
                             )}
+                            {!file && eventImg !== ''  && (
+                                <div className="shareEventImgContainer">
+                                    <img className="shareEventImg" src={PF + eventImg} alt="" />
+                                    <Cancel className="shareEventCancelImg" onClick={() => setEventImg('')} />
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className='eventButtons'>
                         <button className='CancelEventButton' onClick={props.toggle} disabled={disableButtons}>Cancel</button>
-                        <button className='submitEventButton' type="submit" disabled={disableButtons}>Create</button>
+                        <button 
+                            className='submitEventButton' 
+                            type="submit" 
+                            disabled={disableButtons}>
+                            {event.title===''? 'Create':'Update' }
+                        </button>
                     </div>
                 </form>
             </div>

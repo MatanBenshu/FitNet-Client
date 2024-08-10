@@ -2,10 +2,10 @@ import './rightbar.css';
 import { useContext, useEffect, useState } from 'react';
 import axios from '../../Api';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../context/authContext/AuthContext';
 import { Add, Remove,Edit } from '@mui/icons-material';
 import Moment from 'react-moment';
-import EditUserInfoForm from '../editUserInfoForm/EditUserInfoForm';
+import EditUserInfoForm from '../popUpForms/editUserInfoForm/EditUserInfoForm';
 
 export default function Rightbar({ user ,infoUpdated,someUpdate}) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;

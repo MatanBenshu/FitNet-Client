@@ -1,13 +1,13 @@
 import './sidebar.css';
 import { useEffect, useState, useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
-import GroupForm from '../groupForm/groupForm';
-import GroupList from '../groupList/groupList';
+import { AuthContext } from '../../context/authContext/AuthContext';
+import GroupForm from '../popUpForms/groupForm/groupForm';
+import GroupList from './groupList/groupList';
 import {GroupAdd,Group,Event,EventNote} from '@mui/icons-material';
 import {Divider,Chip} from '@mui/material';
 import axios from '../../Api';
-import EventForm from '../eventForm/EventForm';
-import EventList from '../eventList/EventList';
+import EventForm from '../popUpForms/eventForm/EventForm';
+import EventList from './eventList/EventList';
 
 
 

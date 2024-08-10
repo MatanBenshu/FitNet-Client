@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import axios from '../../Api';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../context/authContext/AuthContext';
 import Badge from '@mui/material/Badge';
 import { grey } from '@mui/material/colors';
 

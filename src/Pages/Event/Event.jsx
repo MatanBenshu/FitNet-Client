@@ -29,7 +29,7 @@ export function Event() {
     const eventId = new URLSearchParams(location.search).get('id');
     const eventTitle = useParams().title;
     const navigate = useNavigate();
-    const {eventFetching,eventDispatch} = useContext(EventContext);
+    const {eventFetching,eventDispatch,eventUpdate} = useContext(EventContext);
 
     useEffect(() => {
         const fetchEvent = async () => {
@@ -50,7 +50,6 @@ export function Event() {
                 const weatherRes = await defAxios
                 (`${WEATHER_API_URL}lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEY}`);
                 eventDispatch({type: 'SET_WEATHER', payload: weatherRes.data});
-                console.log(weatherRes);
 
                 eventDispatch({type: 'STOP_FETCH'});
 
@@ -59,7 +58,7 @@ export function Event() {
             }
         };
         fetchEvent();
-    }, [eventId,navigate,eventTitle,eventDispatch]);
+    }, [eventId,navigate,eventTitle,eventDispatch,eventUpdate]);
 
 
     if(eventFetching) {
