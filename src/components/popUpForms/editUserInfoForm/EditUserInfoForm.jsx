@@ -78,7 +78,7 @@ export default function EditUserInfoForm(props) {
     return (
         <div className="popup">
             <div className="popup-inner">
-                <h2>Edit Info</h2>
+                <h2 className='popup-title'>Edit Info</h2>
                 <form className='InfoForm' onSubmit={handleCreation}>
                     <div className='middleFormContainer'>
                         <div className='middleFormItem'>
