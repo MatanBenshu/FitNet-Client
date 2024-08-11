@@ -1,5 +1,5 @@
 
-import {List, Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import {List, Accordion, AccordionDetails, AccordionSummary} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EventListItems from './EventListItem';
 
@@ -15,12 +15,14 @@ export default function EventList({event,title,}) {
                 {title}
             </AccordionSummary>
             <AccordionDetails>
-                <List>
-                    {event?.map((e)=>
-                        (
-                            <EventListItems item={e}/>  
-                        ))}
-                </List>
+                {event && event.length ? 
+                    <List>
+                        {event?.map((e)=>
+                            (
+                                <EventListItems item={e}/>  
+                            ))}
+                    </List>
+                    : <p>No events found.</p>}
             </AccordionDetails>
         </Accordion>
     );
