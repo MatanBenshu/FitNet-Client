@@ -16,12 +16,15 @@ export default function GroupList({group,title,}) {
                 {title}
             </AccordionSummary>
             <AccordionDetails>
-                <List>
-                    {group?.map((g)=>
-                        (
-                            <GroupListItem item={g}/>  
-                        ))}
-                </List>
+                {group && group.length ? 
+                    <List>
+                        {group?.map((g)=>
+                            (
+                                <GroupListItem item={g}/>  
+                            ))}
+                       
+                    </List>
+                    : 'No groups found'}
             </AccordionDetails>
         </Accordion>
     );

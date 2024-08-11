@@ -1,4 +1,4 @@
-.popup {
+.GroupPopup {
     position: fixed;
     z-index: 1;
     left: 0;
@@ -9,7 +9,7 @@
     background-color: rgba(0,0,0,0.4);
     }
     
-    .popup-inner {
+    .GroupPopup-inner {
     background-color: rgb(227, 226, 226);
     position: absolute;
     left: 50%;
@@ -22,7 +22,7 @@
     align-content: center;
     }
     
-    h2 {
+    .GroupPopup-title {
     font-size: 24px;
     text-align: center;
     color: rgb(53, 219, 53) ;
@@ -32,11 +32,11 @@
     
     .textContainer {
         display: flex;
-        justify-content: center;
         align-items: center;
     }
     .name{
         width: 50%;
+        margin-left: 15%;
     }
     .Description{
         margin-top: 20px;

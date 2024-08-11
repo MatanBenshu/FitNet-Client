@@ -9,6 +9,7 @@ export default function GroupForm(props) {
     const { user} = useContext(AuthContext);
     const title = useRef();
     const Desc = useRef();
+    const [type,setType] = useState('public');
 
 
     const  handleCreation =  async (e)  => {
@@ -19,23 +20,45 @@ export default function GroupForm(props) {
             const response = await axios.post('/groups',{
                 Admin:user._id,
                 groupname: title.current.value,
-                desc: Desc.current.value
+                desc: Desc.current.value,
+                type: type,
             });
             console.log(response);
         } catch (error) {
             
         }
         setDisableButton(false);
-        props?.rightBar();
+        props.rightBar?.();
         props.toggle();
     };
 
     return (
-        <div className="popup">
-            <div className="popup-inner">
-                <h2>Create Group</h2>
+        <div className="GroupPopup">
+            <div className="GroupPopup-inner">
+                <h2 className='GroupPopup-title'>Create Group</h2>
                 <form onSubmit={handleCreation}>
                     <div className='textContainer'>
+                        <div className='radioContainer'>
+                            <input
+                                type="radio"
+                                id="public"
+                                name="groupType"
+                                value="public"
+                                checked={type === 'public'}
+                                onChange={() => setType('public')}
+                            />
+                            <label htmlFor="public">Public</label>
+                            <br/>
+                            <input
+                                type="radio"
+                                id="private"
+                                name="groupType"
+                                value="private"
+                                checked={type === 'private'}
+                                onChange={() => setType('private')}
+                            />
+                            <label htmlFor="private">Private</label>
+                        </div>
                         <input
                             className='name'
                             required

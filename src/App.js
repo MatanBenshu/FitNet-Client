@@ -9,6 +9,7 @@ import Page404 from './Pages/Page404/Page404.jsx';
 import Profile from './Pages/Profile/Profile.jsx';
 import Search from './Pages/Search/Search.jsx';
 import Event from './Pages/Event/Event.jsx';
+import Group  from './Pages/Group/Group.jsx';
 
 function  App() {
     const { user } = useContext(AuthContext);
@@ -55,6 +56,12 @@ function  App() {
                         path="event/:title"
                         element={
                             user ? <Event/> : <Navigate to="login" />
+                        }
+                    />
+                    <Route
+                        path="group/:groupname"
+                        element={
+                            user ? <Group/> : <Navigate to="login" />
                         }
                     />
                     <Route

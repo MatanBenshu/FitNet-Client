@@ -2,14 +2,15 @@
 import {  ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import ListItem from '@mui/material/ListItem';
 import {Group} from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
-// need to add link to group page with 'groups/item'
-// use navigte on click
-export default function grouplistItems({item}) {
+
+export default function GrouplistItems({item}) {
+    const navigate = useNavigate();
     return (
         
         <ListItem disablePadding>
-            <ListItemButton onClick={() => console.log(item)}>
+            <ListItemButton onClick={() => navigate(`/group/${item}`)}>
                 <ListItemIcon>
                     <Group />
                 </ListItemIcon>
