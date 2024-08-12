@@ -15,9 +15,9 @@ export default function Post({ post ,handler,updateCurrentUser}) {
     const [isLiked, setIsLiked] = useState(false);
     const [PostDesc,setPostDesc] = useState(post?.desc);
     const [editMode, setEditMode] = useState(false);
-    const { user: currentUser } = useContext(AuthContext);
     const [user, setUser] = useState({});
     const [srcUser, setSrcUser] = useState({});
+    const { user: currentUser } = useContext(AuthContext);
 
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -47,6 +47,7 @@ export default function Post({ post ,handler,updateCurrentUser}) {
                 const res = await axios.get(`/users?userId=${post.srcUser}`);
                 setSrcUser(res.data);   
             } catch (error) {
+                setPostDesc('content or user been deleted');
                 
             }
         };
@@ -133,9 +134,11 @@ export default function Post({ post ,handler,updateCurrentUser}) {
             }
         }
     };
+
+    if (!user._id){
+        return (<></>);
+    }
     
-
-
     return (
         <div className="post">
             <div className="postWrapper">

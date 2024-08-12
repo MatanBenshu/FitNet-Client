@@ -3,11 +3,13 @@ import {PermMedia, EmojiEmotions, Cancel} from '@mui/icons-material';
 import {Dialog, DialogActions, DialogContent, DialogTitle, Button } from '@mui/material';
 import { useContext, useRef, useState } from 'react';
 import { AuthContext } from '../../context/authContext/AuthContext';
+import { GroupContext } from '../../context/groupContext/GroupContext';
 import axios from '../../Api';
 import EmojiPicker from 'emoji-picker-react';
 
 export default function Share({handler}) {
     const { user } = useContext(AuthContext);
+    const { group} = useContext(GroupContext);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const desc = useRef();
     const [file, setFile] = useState(null);
@@ -32,6 +34,7 @@ export default function Share({handler}) {
         const newPost = {
             userId: user._id,
             desc: desc.current.value,
+            group: group._id
         };
         if (file) {
             const data = new FormData();
@@ -46,6 +49,8 @@ export default function Share({handler}) {
         }
         try {
             await axios.post('/posts', newPost);
+            desc.current.value = '';
+            setFile(null);
             handler();
             //window.location.reload();
         } catch (err) {}

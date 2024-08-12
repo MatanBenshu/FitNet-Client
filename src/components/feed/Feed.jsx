@@ -4,6 +4,7 @@ import Share from '../share/Share';
 import './feed.css';
 import axios from '../../Api';
 import { AuthContext } from '../../context/authContext/AuthContext';
+import { GroupContext } from '../../context/groupContext/GroupContext';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import {Favorite, ThumbUp,PersonPin} from '@mui/icons-material';
@@ -81,10 +82,61 @@ export default function Feed({ username,updateCurrentUser,updateRightBar }) {
 
                 </div>}
                 {(!username) && <Share handler={handleReRenderFeed}/>}
-                {posts.map((p) => (
-                    <Post key={p._id} post={p} handler={handleReRenderFeed} updateCurrentUser={updateCurrentUser} />
-                ))}
+                {!(posts && posts.length)? <p className='NoContent'> No content to show </p> :
+                    <>{posts.map((p) => (
+                        <Post key={p._id} post={p} handler={handleReRenderFeed} updateCurrentUser={updateCurrentUser} />
+                    ))}</>}
             </div>
         </div>
     );
 }
+
+
+
+export  function FeedGroup() {
+    const [render,reRender] = useState(0);
+    const [posts, setPosts] = useState([]);
+    const { user } = useContext(AuthContext);
+    const { group } = useContext(GroupContext);
+
+    function handleReRenderFeed ()  {
+        reRender(perv =>perv +1);
+    };
+
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+
+            try {
+                const  res = await axios.get('groups/content/' + group._id);
+                console.log(res.data);  // Debugging purposes, remove this line in production!
+                setPosts(
+                    res.data.sort((p1, p2) => {
+                        return new Date(p2.createdAt) - new Date(p1.createdAt);
+                    })
+                );    
+            } catch (error) {
+                
+            }
+        };
+
+        fetchPosts();
+    }, [ user,render,group]);
+
+    return (
+        <div className="feed">
+            <div className="feedWrapper">
+                <div className='GroupNameAndDescription'>
+                    <h1 className='groupNameTitle'>{group.groupname}</h1>
+                    <p className='groupDescription'>{group.desc}</p>
+                </div>
+                {(group.followers.includes(user._id)) && <Share handler={handleReRenderFeed}/>}
+                {!(posts && posts.length)? <p className='NoContent'> No content to show </p> :
+                    <>{posts.map((p) => (
+                        <Post key={p._id} post={p} handler={handleReRenderFeed} />
+                    ))}</>}
+            </div>
+        </div>
+    );
+}
+
