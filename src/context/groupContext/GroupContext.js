@@ -16,8 +16,8 @@ const INITIAL_STATE = {
         username: '',
         profilePicture: '',
     },
-    GroupFetching: false,
-    GroupUpdate: false,
+    groupFetching: false,
+    groupUpdate: false,
 };
 
 export const GroupContext = createContext(INITIAL_STATE);
@@ -32,7 +32,7 @@ export  const GroupContextProvider = ({ children }) => {
                 group: state.group,
                 groupFetching: state.groupFetching,
                 Admin: state.Admin,
-                GroupUpdate: state.GroupUpdate,
+                groupUpdate: state.groupUpdate,
                 groupDispatch,
             }}
         >
