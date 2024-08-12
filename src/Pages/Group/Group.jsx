@@ -86,11 +86,9 @@ export function PrivateGroup(){
         <> 
             {!group.followers.includes(user._id)? <PrivateWaitingList/> : 
                 <div className='GroupContainer'>
-
                     <SideBarGroupPrivate />
                     <FeedGroup/>
                     <RightbarGroup />
-
                 </div>}
         </>
     );
@@ -135,7 +133,7 @@ export function PrivateWaitingList(){
         <div className='waitingList-Wrapper'>
             <div className="waitingList">
                 <h2> "{group.groupname}", is a private group.. </h2>
-                <h2> You need Admin permission to join </h2>
+                <h2> You need Admin permission to join, </h2>
                 <h2> Send request ?  </h2>
                 { !waiting ? 
                     <button className='waitingListButton' 
