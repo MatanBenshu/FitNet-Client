@@ -28,7 +28,7 @@ export default function Profile() {
 
         if (window.confirm('Are you sure you want to delete the profile? This action is irreversible.')) {
             try {
-                const response = await axios.delete('/users/${user._id}?userId=${user._id}');//delete user
+                const response = await axios.delete(`/users/${user._id}?userId=${user._id}`);//delete user
                 if (response.status === 200) {
                     alert('The profile has been successfully deleted.');
                     // צריך להוסיף את ההתנתקות מהמערכת
