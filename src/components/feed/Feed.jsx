@@ -100,7 +100,9 @@ export  function FeedGroup() {
     const { group } = useContext(GroupContext);
 
     function handleReRenderFeed ()  {
+        console.log('Rendering Feed Group');  
         reRender(perv =>perv +1);
+        console.log(render);
     };
 
 
@@ -109,7 +111,7 @@ export  function FeedGroup() {
 
             try {
                 const  res = await axios.get('groups/content/' + group._id);
-                console.log(res.data);  // Debugging purposes, remove this line in production!
+                console.log(res.data); 
                 setPosts(
                     res.data.sort((p1, p2) => {
                         return new Date(p2.createdAt) - new Date(p1.createdAt);
@@ -121,7 +123,7 @@ export  function FeedGroup() {
         };
 
         fetchPosts();
-    }, [ user,render,group]);
+    }, [render,group]);
 
     return (
         <div className="feed">
@@ -130,11 +132,15 @@ export  function FeedGroup() {
                     <h1 className='groupNameTitle'>{group.groupname}</h1>
                     <p className='groupDescription'>{group.desc}</p>
                 </div>
-                {(group.followers.includes(user._id)) && <Share handler={handleReRenderFeed}/>}
-                {!(posts && posts.length)? <p className='NoContent'> No content to show </p> :
-                    <>{posts.map((p) => (
-                        <Post key={p._id} post={p} handler={handleReRenderFeed} />
-                    ))}</>}
+                {(group.followers.includes(user._id)) ? 
+                    <>
+                        <Share handler={handleReRenderFeed}/>
+                        {!(posts && posts.length)? <p className='NoContent'> No content to show yet! </p> :
+                            <>{posts.map((p) => (
+                                <Post key={p._id} post={p} handler={handleReRenderFeed} />
+                            ))}</>}
+                    </> 
+                    : <p className='NoContent'> Please join the group to see the content. </p>} 
             </div>
         </div>
     );

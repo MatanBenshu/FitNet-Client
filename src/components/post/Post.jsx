@@ -57,10 +57,10 @@ export default function Post({ post ,handler,updateCurrentUser}) {
         
     }, [post.srcUser,updateCurrentUser]);
 
-    const likeHandler = () => {
+    const likeHandler = async () => {
         if (currentUser._id !== post.userId) {
             try {
-                axios.put('/posts/' + post._id + '/like', { userId: currentUser._id });
+                await axios.put('/posts/' + post._id + '/like', { userId: currentUser._id });
             } catch (err) {
                 console.error(err);
             }
@@ -69,10 +69,10 @@ export default function Post({ post ,handler,updateCurrentUser}) {
             handler();
         }
     };
-    const savedHandler = () => {
+    const savedHandler = async () => {
         if (currentUser._id !== post.userId) {
             try {
-                axios.put('/posts/' + post._id + '/save', { userId: currentUser._id });
+                await axios.put('/posts/' + post._id + '/save', { userId: currentUser._id });
             } catch (err) {
                 console.error(err);
             }
@@ -81,7 +81,7 @@ export default function Post({ post ,handler,updateCurrentUser}) {
             handler();
         }
     };
-    const shareHandler = () => {
+    const shareHandler = async () => {
         if (currentUser._id !== post.userId && currentUser._id !== post.srcUser ) {
             let postId;
             try {
@@ -91,7 +91,7 @@ export default function Post({ post ,handler,updateCurrentUser}) {
                 else{
                     postId = post.srcPostId;
                 }
-                axios.put('/posts/' + postId + '/share', { userId: currentUser._id });
+                await axios.put('/posts/' + postId + '/share', { userId: currentUser._id });
                 handler();
             } catch (err) {
                 console.error(err);
@@ -105,14 +105,15 @@ export default function Post({ post ,handler,updateCurrentUser}) {
             setEditMode(true);
         }
     };
-    const handleSave = () => {
+
+    const handleSave = async () => {
         if (!PostDesc.trim()) {
             alert('Please enter a description');
             return;
         }
         setEditMode(false);
         try {
-            axios.put(`/posts/${post._id}`, { desc: PostDesc });
+            await axios.put(`/posts/${post._id}`, { desc: PostDesc });
             handler();
         } catch (err) {
             console.error(err);
@@ -121,16 +122,16 @@ export default function Post({ post ,handler,updateCurrentUser}) {
         
     };
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         if (currentUser._id === post.userId ) {
             if (window.confirm('Are you sure you want to delete this post?')) {
                 try {
-                    axios.delete(`/posts/${post._id}`,{userId: currentUser._id});
+                    await axios.delete(`/posts/${post._id}`,{userId: currentUser._id});
+                    handler(); 
                 } catch (err) {
                     console.error(err);
                 } 
-                //window.location.reload();
-                handler(); 
+                //window.location.reload();  
             }
         }
     };
