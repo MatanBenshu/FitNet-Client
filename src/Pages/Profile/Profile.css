@@ -48,3 +48,12 @@
 .profileRightBottom{
     display: flex;
 }
+.deleteProfileBtn {
+    padding: 10px;
+    margin-top: 20px; 
+    background-color: #ff4d4d; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
