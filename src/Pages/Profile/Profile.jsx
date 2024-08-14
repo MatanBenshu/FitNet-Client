@@ -24,24 +24,8 @@ export default function Profile() {
         console.log('rendering some');
         setInformation(prev => prev + 1);
     };
-    const handleDeleteUser = async () => {
 
-        if (window.confirm('Are you sure you want to delete the profile? This action is irreversible.')) {
-            try {
-                const response = await axios.delete(`/users/${user._id}?userId=${user._id}`);//delete user
-                if (response.status === 200) {
-                    alert('The profile has been successfully deleted.');
-                    // צריך להוסיף את ההתנתקות מהמערכת
-                    navigate('/login');
-                } else {
-                    throw new Error('Failed to delete the profile');
-                }
-            } catch (error) {
-                console.error('Error deleting the profile:', error);
-                alert('Error deleting profile. Try again later.');
-            }
-        }
-    };
+
   
     useEffect(() => {
         const fetchUser = async () => {
@@ -85,7 +69,6 @@ export default function Profile() {
                         </div>
                         <div className="profileInfo">
                             <h4 className="profileInfoName">{user.username}</h4>
-                            <button className="deleteProfileBtn" onClick={handleDeleteUser}>Delete profile</button>
                         </div>
                     </div>
                     <div className="profileRightBottom">

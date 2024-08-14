@@ -6,6 +6,8 @@ import { AuthContext } from '../../context/authContext/AuthContext';
 import { Add, Remove,Edit } from '@mui/icons-material';
 import Moment from 'react-moment';
 import EditUserInfoForm from '../popUpForms/editUserInfoForm/EditUserInfoForm';
+import ChangePasswordForm from '../popUpForms/changePasswordForm/ChangePasswordForm';
+import DeleteAccountForm from '../popUpForms/deleteAccountForm/DeleteAccountForm';
 
 export default function Rightbar({ user ,infoUpdated,someUpdate}) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -14,11 +16,20 @@ export default function Rightbar({ user ,infoUpdated,someUpdate}) {
     const { user: currentUser, dispatch } = useContext(AuthContext);
     const [followed, setFollowed] = useState(currentUser.followings.includes(user?._id));
     const [showEditForm, setShowEditForm] = useState(false);
-    
+    const [showPasswordForm, setShowPasswordForm] = useState(false);
+    const [showDeleteForm, setShowDeleteForm] = useState(false);
 
     function togglePopEdit () {
         infoUpdated();
         setShowEditForm(!showEditForm);
+    };
+
+    function togglePopPassword () {
+        setShowPasswordForm(!showPasswordForm);
+    };
+
+    function togglePopDeletion () {
+        setShowDeleteForm(!showDeleteForm);
     };
 
     useEffect(() => {
@@ -75,13 +86,27 @@ export default function Rightbar({ user ,infoUpdated,someUpdate}) {
     const ProfileRightbar = () => {
         return (
             <>
+                {showDeleteForm ? <DeleteAccountForm toggle={togglePopDeletion} /> : null}
+                {showPasswordForm ? <ChangePasswordForm toggle={togglePopPassword} /> : null}
                 {showEditForm ? <EditUserInfoForm toggle={togglePopEdit} /> : null}
-                {user.username !== currentUser.username && (
-                    <button className="rightbarFollowButton" onClick={handleClick}>
-                        {followed ? 'Unfollow' : 'Follow'}
-                        {followed ? <Remove /> : <Add />}
-                    </button>
-                )}
+                
+                {user.username !== currentUser.username ? 
+                    (
+                        <button className="rightbarFollowButton" onClick={handleClick}>
+                            {followed ? 'Unfollow' : 'Follow'}
+                            {followed ? <Remove /> : <Add />}
+                        </button>
+                    ):(
+                        <div className='deleteAndChangePasswordBtnsContainer'>
+                            <button className="deleteProfileBtn" onClick={togglePopDeletion}>
+                            Delete Account
+                            </button>
+                            <button className="ChangePasswordBtn" onClick={togglePopPassword }>
+                            Change Password
+                            </button>  
+                        </div>  
+                    )
+                }
                 <div className='titleContainer'>
                     <span className="rightbarTitle">User information</span>
                     {user._id===currentUser._id && <Edit className='editButton' onClick={togglePopEdit}/>}

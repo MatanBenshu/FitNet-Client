@@ -12,6 +12,13 @@
   border-radius: 10px;
   margin: 30px 0;
 }
+
+.deleteAndChangePasswordBtnsContainer{
+  display: flex;
+  align-items: center;
+  justify-content:space-evenly;
+  margin-bottom: 15px;
+}
 .titleContainer{
   display: flex;
   align-items: center;
@@ -25,10 +32,11 @@
   background-color: #388E3C;
   color: white;
   cursor: pointer;
-}
-
-.rightbarTitle{
-    margin-bottom: 20px;
+  margin-right: 20px;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #347A34;
+  }
 }
 
 .rightbarFriendList {
@@ -87,15 +95,15 @@
 .rightbarFollowButton{
   margin-top: 30px;
   margin-bottom: 10px;
-  border: none;
-  background-color: #1872f2;
-  color: white;
-  border-radius: 5px;
   padding: 5px 10px;
   display: flex;
   align-items: center;
   font-size: 16px;
   font-weight: 500;
+  border: none;
+  background-color: #1872f2;
+  color: white;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -194,4 +202,48 @@
   button{
     cursor: pointer;
   }
+}
+
+.deleteBtnContainer{
+  margin: 10px;
+  display: flex;
+}
+
+.deleteProfileBtn {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  background-color: #ff4d4d; 
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  &:hover {
+    background-color: #e33939;
+  }
+}
+
+.ChangePasswordBtn{
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  background-color: #1872f2;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  &:hover {
+    background-color: #0b579e;
+  }
+
 }
