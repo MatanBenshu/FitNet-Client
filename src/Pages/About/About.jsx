@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './About.css';
-import axios from 'axios';
+import axios from '../../Api';
 import NavBar from '../../components/navBar/navBar';
 
 const About = () => {
@@ -43,7 +43,7 @@ const About = () => {
                         <p>{content}</p>
                         <h3>Creators</h3>
                         <ul>
-                            {creators.map((creator) => <li key={creator.id}>{creator}</li> )}
+                            {creators.map((creator) => <li key={creator}>{creator}</li> )}
                         </ul>
                     </> )}
             </div>

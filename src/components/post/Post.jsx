@@ -1,21 +1,23 @@
 import './post.css';
 import {Edit ,SaveAs,DeleteForever} from '@mui/icons-material';
 import { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../../Api';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../context/authContext/AuthContext';
+import Badge from '@mui/material/Badge';
+import { grey } from '@mui/material/colors';
 
-export default function Post({ post ,handler}) {
+export default function Post({ post ,handler,updateCurrentUser}) {
     const [save, setSave] = useState(post.savedBy.length);
     const [isSaved, setIsSaved] = useState(false);
     const [like, setLike] = useState(post.likes.length);
     const [isLiked, setIsLiked] = useState(false);
     const [PostDesc,setPostDesc] = useState(post?.desc);
     const [editMode, setEditMode] = useState(false);
-    const { user: currentUser } = useContext(AuthContext);
     const [user, setUser] = useState({});
     const [srcUser, setSrcUser] = useState({});
+    const { user: currentUser } = useContext(AuthContext);
 
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -37,7 +39,7 @@ export default function Post({ post ,handler}) {
             }
         };
         fetchUser();
-    }, [post.userId]);
+    }, [post.userId,updateCurrentUser]);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -45,6 +47,7 @@ export default function Post({ post ,handler}) {
                 const res = await axios.get(`/users?userId=${post.srcUser}`);
                 setSrcUser(res.data);   
             } catch (error) {
+                setPostDesc('content or user been deleted');
                 
             }
         };
@@ -52,32 +55,34 @@ export default function Post({ post ,handler}) {
             fetchUser();
         }
         
-    }, [post.srcUser]);
+    }, [post.srcUser,updateCurrentUser]);
 
-    const likeHandler = () => {
+    const likeHandler = async () => {
         if (currentUser._id !== post.userId) {
             try {
-                axios.put('/posts/' + post._id + '/like', { userId: currentUser._id });
+                await axios.put('/posts/' + post._id + '/like', { userId: currentUser._id });
             } catch (err) {
                 console.error(err);
             }
             setLike(isLiked ? like - 1 : like + 1);
             setIsLiked(!isLiked);
+            handler();
         }
     };
-    const savedHandler = () => {
+    const savedHandler = async () => {
         if (currentUser._id !== post.userId) {
             try {
-                axios.put('/posts/' + post._id + '/save', { userId: currentUser._id });
+                await axios.put('/posts/' + post._id + '/save', { userId: currentUser._id });
             } catch (err) {
                 console.error(err);
             }
             setSave(isSaved ? save - 1 : save + 1);
             setIsSaved(!isSaved);
+            handler();
         }
     };
-    const shareHandler = () => {
-        if (currentUser._id!== post.userId ) {
+    const shareHandler = async () => {
+        if (currentUser._id !== post.userId && currentUser._id !== post.srcUser ) {
             let postId;
             try {
                 if (!srcUser._id){
@@ -86,7 +91,7 @@ export default function Post({ post ,handler}) {
                 else{
                     postId = post.srcPostId;
                 }
-                axios.put('/posts/' + postId + '/share', { userId: currentUser._id });
+                await axios.put('/posts/' + postId + '/share', { userId: currentUser._id });
                 handler();
             } catch (err) {
                 console.error(err);
@@ -100,14 +105,15 @@ export default function Post({ post ,handler}) {
             setEditMode(true);
         }
     };
-    const handleSave = () => {
+
+    const handleSave = async () => {
         if (!PostDesc.trim()) {
             alert('Please enter a description');
             return;
         }
         setEditMode(false);
         try {
-            axios.put(`/posts/${post._id}`, { desc: PostDesc });
+            await axios.put(`/posts/${post._id}`, { desc: PostDesc });
             handler();
         } catch (err) {
             console.error(err);
@@ -116,22 +122,24 @@ export default function Post({ post ,handler}) {
         
     };
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         if (currentUser._id === post.userId ) {
             if (window.confirm('Are you sure you want to delete this post?')) {
                 try {
-                    axios.delete(`/posts/${post._id}`,{userId: currentUser._id});
+                    await axios.delete(`/posts/${post._id}`,{userId: currentUser._id});
+                    handler(); 
                 } catch (err) {
                     console.error(err);
                 } 
-                //window.location.reload();
-                handler(); 
+                //window.location.reload();  
             }
         }
     };
+
+    if (!user._id){
+        return (<></>);
+    }
     
-
-
     return (
         <div className="post">
             <div className="postWrapper">
@@ -186,26 +194,26 @@ export default function Post({ post ,handler}) {
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
-                        <img
-                            className="likeSaveShareIcon"
-                            src={`${PF}like.png`}
-                            onClick={likeHandler}
-                            alt="like"
-                        />
-                        <img
-                            className="likeSaveShareIcon"
-                            src={`${PF}heart.png`}
-                            onClick={savedHandler}
-                            alt="save"
-                        />
+                        <Badge badgeContent={like} color={grey[500]} showZero>
+                            <img
+                                className="likeSaveShareIcon"
+                                src={`${PF}like.png`}
+                                onClick={likeHandler}
+                                alt="like"
+                            /></Badge>
+                        <Badge badgeContent={save} color={grey[500]} showZero>
+                            <img
+                                className="likeSaveShareIcon"
+                                src={`${PF}heart.png`}
+                                onClick={savedHandler}
+                                alt="save"
+                            /></Badge>
                         <img
                             className="likeSaveShareIcon"
                             src={`${PF}share.png`}
                             onClick={shareHandler}
                             alt="share"
                         />
-                        <span className="postLikeCounter">{like} likes </span>
-                        <span className="postLikeCounter">{save} saved </span>
                     </div>
                     <div className="postBottomRight">
                         <DeleteForever className='postMenu' color='error' onClick={handleDelete}/>

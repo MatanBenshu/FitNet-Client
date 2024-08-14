@@ -6,21 +6,6 @@
   padding: 20px 20px 0 0;
 }
 
-.birthdayContainer {
-  display: flex;
-  align-items: center;
-}
-
-.birthdayImg {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-}
-
-.birthdayText {
-  font-weight: 300;
-  font-size: 15px;
-}
 
 .rightbarAd {
   width: 100%;
@@ -28,8 +13,30 @@
   margin: 30px 0;
 }
 
-.rightbarTitle{
-    margin-bottom: 20px;
+.deleteAndChangePasswordBtnsContainer{
+  display: flex;
+  align-items: center;
+  justify-content:space-evenly;
+  margin-bottom: 15px;
+}
+.titleContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.editButton{
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 25px;
+  background-color: #388E3C;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #347A34;
+  }
 }
 
 .rightbarFriendList {
@@ -65,13 +72,13 @@
 .rightbarFollowings{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .rightbarFollowing{
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  margin-right: 5px;
   cursor: pointer;
 }
 
@@ -81,22 +88,162 @@
   object-fit: cover;
   border-radius: 5px;
 }
+.rightbarFollowingName{
+  text-align: center;
+}
 
 .rightbarFollowButton{
   margin-top: 30px;
   margin-bottom: 10px;
-  border: none;
-  background-color: #1872f2;
-  color: white;
-  border-radius: 5px;
   padding: 5px 10px;
   display: flex;
   align-items: center;
   font-size: 16px;
   font-weight: 500;
+  border: none;
+  background-color: #1872f2;
+  color: white;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .rightbarFollowButton:focus{
   outline: none;
+}
+
+.rightbarStaticWrapper{
+  margin-bottom: 30px;
+  display:flex;
+}
+.staticContainer{
+  flex: 1;
+}
+
+.AdminContainer{
+  display: flex;
+  width: 100%;
+}
+
+.ownerContainer{
+  flex:1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 5px;
+  align-items:center;
+}
+
+
+.ownertag{
+  margin: 15px;
+}
+
+.ownerEventMenu{
+  flex:1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px 50px 20px 0px;
+  justify-content: center;
+}
+
+.OwnerButtonDelete,
+.OwnerButtonEdit{
+  width: 100%;
+  margin-top: 10px;
+  font-size: 14px;
+  padding: 10px ;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  border: none ;
+  transition-duration: 0.4s;
+
+}
+
+.OwnerButtonDelete{
+  background-color: rgb(238, 51, 51);
+  &:hover{
+    background-color: rgb(165, 5, 5);
+  }
+}
+
+.OwnerButtonEdit{
+  background-color: #302de9;
+  &:hover{
+    background-color: #0b0986;
+  }
+}
+.groupWaitingList {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+.WaitingUser{
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content:space-evenly;
+  border-radius: 10px;
+  transition-duration: 0.4s;
+  &:hover{
+    background-color: #e5e4e4;
+  }
+  img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 10px;
+  }
+  button{
+    cursor: pointer;
+  }
+}
+
+.deleteBtnContainer{
+  margin: 10px;
+  display: flex;
+}
+
+.deleteProfileBtn {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  background-color: #ff4d4d; 
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  &:hover {
+    background-color: #e33939;
+  }
+}
+
+.ChangePasswordBtn{
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  background-color: #1872f2;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  &:hover {
+    background-color: #0b579e;
+  }
+
 }
