@@ -3,7 +3,6 @@ import axios from 'axios';
 // axios instance with base url and timeout for server endpoint in env file
 const customAxios = axios.create({
     baseURL: process.env.REACT_APP_API_ENDPOINT,
-    timeout: 5000,
 });
 
 // cities api for autocomplete input in event form 
