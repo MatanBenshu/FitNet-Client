@@ -1,8 +1,8 @@
 import React, { useState, useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext.js';
+import { AuthContext } from '../../context/authContext/AuthContext.js';
 import NavBar from '../../components/navBar/navBar';
-import axios from 'axios';
+import axios from '../../Api.js';
 import './Login.css';
 
 
@@ -16,6 +16,7 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
+            console.log(process.env.REACT_APP_API_ENDPOINT);
             dispatch({ type: 'LOGIN_START' });
             const response = await axios.post('/auth/login',{ email: email.current.value, password: password.current.value });
             dispatch({ type: 'LOGIN_SUCCESS', payload:response.data });

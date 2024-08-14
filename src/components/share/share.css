@@ -72,6 +72,10 @@
     margin-right: 20px;
     cursor: pointer;
     color: white;
+    transition: background-color 0.3s ease;
+    &:hover {
+        background-color: #30a74a;
+    }
 }
 
 .shareImgContainer{

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link,Outlet } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext.js';
+import { AuthContext } from '../../context/authContext/AuthContext.js';
 import './navBar.css';
 
 function NavBar() {

@@ -1,25 +1,24 @@
 import './sidebar.css';
 import { useEffect, useState, useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
-import GroupForm from '../groupForm/groupForm';
-import GroupList from '../groupList/groupList';
+import { AuthContext } from '../../context/authContext/AuthContext';
+import GroupForm from '../popUpForms/groupForm/groupForm';
+import GroupList from './groupList/groupList';
 import {GroupAdd,Group,Event,EventNote} from '@mui/icons-material';
 import {Divider,Chip} from '@mui/material';
-import axios from 'axios';
-import EventForm from '../eventForm/EventForm';
-import EventList from '../eventList/EventList';
+import axios from '../../Api';
+import EventForm from '../popUpForms/eventForm/EventForm';
+import EventList from './eventList/EventList';
 
 
 
 
-export default function Sidebar() {
+export default function Sidebar({updateRightBar}) {
 
     const [showFormGroup, setShowFormGroup] = useState(false);
     const [showFormEvent, setShowFormEvent] = useState(false);
     const { user } = useContext(AuthContext);
     const [groups, setGroups] = useState([]);
     const [events, setEvents] = useState([]); 
-    console.log( events);
 
 
     function togglePopGroup () {
@@ -32,26 +31,34 @@ export default function Sidebar() {
 
     useEffect(() => {
         const fetchGroups = async () => {
-            const res = await axios.get('/groups/all/' + user._id);
-            console.log(res.data);  // Debugging purposes, remove this line in production!
-            setGroups(res.data);
+            try{
+                const res = await axios.get('/groups/all/' + user._id);
+                console.log(res.data);  // Debugging purposes, remove this line in production!
+                setGroups(res.data);
+            } catch (err) {
+                console.log(err);
+            }
         };
         fetchGroups();
-    }, [user._id,showFormGroup]);
+    }, [user,showFormGroup]);
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const res = await axios.get('/events/all/' + user._id);
-            console.log(res.data);  // Debugging purposes, remove this line in production!
-            setEvents(res.data);
+            try{
+                const res = await axios.get('/events/all/' + user._id);
+                console.log(res.data);  // Debugging purposes, remove this line in production!
+                setEvents(res.data);
+            } catch (err) {
+                console.log(err);
+            }
         };
         fetchEvents();
-    }, [user._id,showFormEvent]);
+    }, [user,showFormEvent]);
 
     return (
         <>
-            {showFormGroup ? <GroupForm toggle={togglePopGroup} /> : null}
-            {showFormEvent ? <EventForm toggle={togglePopEvent} /> : null}
+            {showFormGroup ? <GroupForm toggle={togglePopGroup} rightBar={updateRightBar} /> : null}
+            {showFormEvent ? <EventForm toggle={togglePopEvent} rightBar={updateRightBar}/> : null}
             <div className="sidebar">
                 <div className="sidebarWrapper">
                     <button className="sidebarButtonGroup" onClick={togglePopGroup}>

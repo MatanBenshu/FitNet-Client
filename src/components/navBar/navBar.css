@@ -1,5 +1,9 @@
 .navbar {
     display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    height: 40px;
     justify-content: center;
     align-items: center;
     background-color: #ff8800; /* Orange */
