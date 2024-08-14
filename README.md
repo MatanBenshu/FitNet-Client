@@ -75,8 +75,7 @@ To run this project, you will need to have the following software and hardware:
 
 ## Running the Application
 - Start the server with the command 'npm run start'
-- change the address of the server in .env file to your localhost + '/images/'
-- change the address of the server in the package.json "proxy" to your localhost
+- change the address of the server in .env.development file to your localhost in REACT_APP_API_ENDPOINT
 - start the client side with the command 'npm run start' 
 
 ## Contact
