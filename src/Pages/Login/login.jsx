@@ -16,6 +16,7 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
+            console.log(process.env.REACT_APP_API_ENDPOINT);
             dispatch({ type: 'LOGIN_START' });
             const response = await axios.post('/auth/login',{ email: email.current.value, password: password.current.value });
             dispatch({ type: 'LOGIN_SUCCESS', payload:response.data });
